@@ -1,0 +1,85 @@
+{
+  "org_controls": [
+    {
+      "id": "no_customer_pii",
+      "label": "No customer PII in prompts"
+    },
+    {
+      "id": "company_sso",
+      "label": "Company SSO only"
+    },
+    {
+      "id": "prompt_audit_6mo",
+      "label": "Prompt logs kept 6 months"
+    },
+    {
+      "id": "internal_use_only",
+      "label": "Internal use only"
+    },
+    {
+      "id": "named_owner",
+      "label": "Named owner and department"
+    }
+  ],
+  "vendor_controls": [
+    {
+      "id": "vendor_dpa_signed",
+      "label": "Signed DPA with this vendor"
+    },
+    {
+      "id": "no_training_on_code",
+      "label": "Vendor does not train on or keep our code"
+    }
+  ],
+  "cases": {
+    "cursor": {
+      "tool": "Cursor",
+      "vendor": "Anysphere",
+      "status": "signed",
+      "signed": "2026-05-12",
+      "thread_id": "T-CURSOR-2026-05",
+      "controls": {
+        "no_customer_pii": true,
+        "company_sso": true,
+        "prompt_audit_6mo": true,
+        "internal_use_only": true,
+        "named_owner": true,
+        "vendor_dpa_signed": true,
+        "no_training_on_code": true
+      }
+    },
+    "notion": {
+      "tool": "Notion AI",
+      "vendor": "Notion Labs",
+      "status": "signed",
+      "signed": "2026-06-03",
+      "thread_id": "T-NOTION-2026-06",
+      "controls": {
+        "no_customer_pii": true,
+        "company_sso": true,
+        "prompt_audit_6mo": true,
+        "internal_use_only": true,
+        "named_owner": true,
+        "vendor_dpa_signed": true,
+        "no_training_on_code": null
+      }
+    },
+    "replit": {
+      "tool": "Replit",
+      "vendor": "Replit",
+      "status": "blocked",
+      "signed": null,
+      "thread_id": "T-REPLIT-2026-08",
+      "trigger": "@Greenlit Can Product use Replit for internal prototypes?",
+      "controls": {
+        "no_customer_pii": "inherit",
+        "company_sso": "inherit",
+        "prompt_audit_6mo": "inherit",
+        "internal_use_only": "inherit",
+        "named_owner": "inherit",
+        "vendor_dpa_signed": false,
+        "no_training_on_code": false
+      }
+    }
+  }
+}

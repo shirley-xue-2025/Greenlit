@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GreenlitApprovalRecord",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "record_id",
+    "tool",
+    "vendor",
+    "status",
+    "inherited",
+    "gaps",
+    "source_thread_id",
+    "agent_envelopes",
+    "content_hash",
+    "version",
+    "updated_at"
+  ],
+  "properties": {
+    "record_id": { "type": "string" },
+    "tool": { "type": "string" },
+    "vendor": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "blocked", "signed", "superseded"]
+    },
+    "inherited": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "gaps": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "source_thread_id": { "type": "string" },
+    "source_message_ids": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "agent_envelopes": { "type": "array" },
+    "human_signoffs": { "type": "array" },
+    "content_hash": { "type": "string" },
+    "version": { "type": "integer", "minimum": 1 },
+    "updated_at": { "type": "string" }
+  }
+}

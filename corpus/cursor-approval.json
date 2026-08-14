@@ -1,0 +1,35 @@
+{
+  "id": "T-CURSOR-2026-05",
+  "channel": "ai-tools",
+  "tool": "Cursor",
+  "vendor": "Anysphere",
+  "decision": "signed",
+  "signed_at": "2026-05-12T16:40:00Z",
+  "signers": ["Priya Chen, Legal", "Jonas Weber, Security"],
+  "messages": [
+    {
+      "user": "Maya Okonkwo",
+      "role": "Product",
+      "ts": "2026-05-08T09:12:00Z",
+      "text": "Can Engineering use Cursor for internal IDE work? Same problem as the last coding-assistant request: we need something in the editor, not a chat tab."
+    },
+    {
+      "user": "Jonas Weber",
+      "role": "Security",
+      "ts": "2026-05-08T11:04:00Z",
+      "text": "Org bar is unchanged: no customer PII in prompts, company SSO only, prompt logs kept 6 months for Legal, internal employees only, named owner. Cursor is a code tool so we also need a signed DPA and written proof they do not train on or keep our code."
+    },
+    {
+      "user": "Tomas Novak",
+      "role": "Procurement",
+      "ts": "2026-05-09T14:22:00Z",
+      "text": "Anysphere DPA is signed (file PROC-DPA-CURSOR-2026-05). Training opt-out is in the DPA annex: they do not train on customer code and do not retain prompts after the session. SSO via our IdP is on."
+    },
+    {
+      "user": "Priya Chen",
+      "role": "Legal",
+      "ts": "2026-05-12T16:40:00Z",
+      "text": "Legal signs Cursor for Engineering, owner Maya Okonkwo, internal IDE use only. Conditions: no customer PII in prompts; company SSO; 6-month prompt audit; Anysphere DPA on file; no-training-on-code annex. This DPA does not cover any other vendor."
+    }
+  ]
+}

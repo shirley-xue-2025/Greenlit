@@ -1,0 +1,8 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+.cognee_data/
+.cognee_system/
+qdrant_storage/
+.DS_Store

@@ -1,0 +1,35 @@
+{
+  "id": "T-NOTION-2026-06",
+  "channel": "ai-tools",
+  "tool": "Notion AI",
+  "vendor": "Notion Labs",
+  "decision": "signed",
+  "signed_at": "2026-06-03T10:15:00Z",
+  "signers": ["Priya Chen, Legal", "Jonas Weber, Security"],
+  "messages": [
+    {
+      "user": "Maya Okonkwo",
+      "role": "Product",
+      "ts": "2026-05-28T13:40:00Z",
+      "text": "Product wants Notion AI in the team workspace for drafting specs. Not a coding tool. Can we reuse the Cursor approval?"
+    },
+    {
+      "user": "Jonas Weber",
+      "role": "Security",
+      "ts": "2026-05-28T15:02:00Z",
+      "text": "Org controls carry: no customer PII, company SSO, 6-month prompt logs, internal use, named owner. Cursor's DPA is Anysphere, not Notion. Notion AI is not a code tool so the no-training-on-code clause does not apply here — do not pretend it does."
+    },
+    {
+      "user": "Tomas Novak",
+      "role": "Procurement",
+      "ts": "2026-06-02T09:18:00Z",
+      "text": "Notion DPA signed (file PROC-DPA-NOTION-2026-06). Workspace SSO on. No code-retention schedule because this is documents, not a repository."
+    },
+    {
+      "user": "Priya Chen",
+      "role": "Legal",
+      "ts": "2026-06-03T10:15:00Z",
+      "text": "Legal signs Notion AI for Product, owner Maya Okonkwo, internal workspace drafting only. Same five org controls as Cursor. Vendor DPA is Notion's. This approval is not evidence that a coding vendor may keep our source."
+    }
+  ]
+}
