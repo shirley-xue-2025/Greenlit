@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Retrieve similar prior approvals (Qdrant) and graph context (Cognee).
 
-Run from gate/:  .venv/bin/python retrieve.py "Replit internal prototypes"
+Run from the repo root:  python retrieve.py "Replit internal prototypes"
 """
 from __future__ import annotations
 

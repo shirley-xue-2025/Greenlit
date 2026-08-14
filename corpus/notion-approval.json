@@ -8,7 +8,7 @@
   "signers": ["Priya Chen, Legal", "Jonas Weber, Security"],
   "messages": [
     {
-      "user": "Maya Okonkwo",
+      "user": "Shirley Xue",
       "role": "Product",
       "ts": "2026-05-28T13:40:00Z",
       "text": "Product wants Notion AI in the team workspace for drafting specs. Not a coding tool. Can we reuse the Cursor approval?"
@@ -29,7 +29,7 @@
       "user": "Priya Chen",
       "role": "Legal",
       "ts": "2026-06-03T10:15:00Z",
-      "text": "Legal signs Notion AI for Product, owner Maya Okonkwo, internal workspace drafting only. Same five org controls as Cursor. Vendor DPA is Notion's. This approval is not evidence that a coding vendor may keep our source."
+      "text": "Legal signs Notion AI for Product, owner Shirley Xue, internal workspace drafting only. Same five org controls as Cursor. Vendor DPA is Notion's. This approval is not evidence that a coding vendor may keep our source."
     }
   ]
 }

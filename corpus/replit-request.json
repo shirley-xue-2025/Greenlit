@@ -6,13 +6,13 @@
   "decision": "blocked",
   "signed_at": null,
   "signers": [],
-  "trigger": "@Greenlit Can Product use Replit for internal prototypes?",
+  "trigger": "@Greenlit I want to use Replit for internal prototypes. Can you help with the approval?",
   "messages": [
     {
-      "user": "Maya Okonkwo",
+      "user": "Shirley Xue",
       "role": "Product",
       "ts": "2026-08-14T18:00:00Z",
-      "text": "@Greenlit Can Product use Replit for internal prototypes? We want the frontend experiments in a browser IDE this quarter. Owner would be me, Product, internal only."
+      "text": "@Greenlit I want to use Replit for internal prototypes. Can you help with the approval? Frontend experiments in a browser IDE this quarter. Owner would be me, Product, internal only."
     }
   ]
 }

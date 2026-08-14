@@ -3,19 +3,19 @@
   "qdrant": [
     {
       "score": 0.77310467,
-      "preview": "AI-tool approval thread T-REPLIT-2026-08. Tool: Replit. Vendor: Replit. Decision: blocked. Not signed. Request: @Greenlit Can Product use Replit for internal prototypes? Dated discussion: 2026-08-14T18:00:00Z Maya Okonkwo (Product): @Greenlit Can Product use Replit for interna...",
+      "preview": "AI-tool approval thread T-REPLIT-2026-08. Tool: Replit. Vendor: Replit. Decision: blocked. Not signed. Request: @Greenlit I want to use Replit for internal prototypes. Can you help with the approval? Dated discussion: 2026-08-14T18:00:00Z Shirley Xue (Product): @Greenlit I want to use Replit...",
       "tool_guess": "Replit"
     },
     {
       "score": 0.46686047,
-      "preview": "AI-tool approval thread T-CURSOR-2026-05. Tool: Cursor. Vendor: Anysphere. Decision: signed. Signed at: 2026-05-12T16:40:00Z. Signers: Priya Chen, Legal; Jonas Weber, Security. Dated discussion: 2026-05-08T09:12:00Z Maya Okonkwo (Product): Can Engineering use Cursor for intern...",
+      "preview": "AI-tool approval thread T-CURSOR-2026-05. Tool: Cursor. Vendor: Anysphere. Decision: signed. Signed at: 2026-05-12T16:40:00Z. Signers: Priya Chen, Legal; Jonas Weber, Security. Dated discussion: 2026-05-08T09:12:00Z Shirley Xue (Product): Can Engineering use Cursor for intern...",
       "tool_guess": "Cursor"
     },
     {
       "score": 0.4384547,
-      "preview": "AI-tool approval thread T-NOTION-2026-06. Tool: Notion AI. Vendor: Notion Labs. Decision: signed. Signed at: 2026-06-03T10:15:00Z. Signers: Priya Chen, Legal; Jonas Weber, Security. Dated discussion: 2026-05-28T13:40:00Z Maya Okonkwo (Product): Product wants Notion AI in the t...",
+      "preview": "AI-tool approval thread T-NOTION-2026-06. Tool: Notion AI. Vendor: Notion Labs. Decision: signed. Signed at: 2026-06-03T10:15:00Z. Signers: Priya Chen, Legal; Jonas Weber, Security. Dated discussion: 2026-05-28T13:40:00Z Shirley Xue (Product): Product wants Notion AI in the t...",
       "tool_guess": "Notion"
     }
   ],
-  "cognee_preview": "CHUNKS:\n{'id': '77df8f11-bdab-5ac4-ad08-9885adf9ad8b', 'created_at': 1786726749832, 'updated_at': 1786726749832, 'ontology_valid': False, 'ontology_uri': None, 'version': 1, 'topological_rank': 0, 'metadata': {'index_fields': ['text']}, 'type': 'IndexSchema', 'belongs_to_set': [], 'source_pipeline': None, 'source_task': None, 'source_node_set': None, 'source_user': None, 'source_content_hash': None, 'feedback_weight': 0.5, 'importance_weight': 0.5, 'text': 'AI-tool approval thread T-REPLIT-2026-08.\\nTool: Replit.\\nVendor: Replit.\\nDecision: blocked.\\nNot signed.\\nRequest: @Greenlit Can Product use Replit for internal prototypes?\\nDated discussion:\\n2026-08-14T18:00:00Z Maya Okonkwo (Product): @Greenlit Can Product use Replit for internal prototypes? We want the frontend experiments in a browser...\n\nGRAPH_COMPLETION:\nReplit internal prototypes refer to the use of Replit, a browser-based IDE, for internal frontend development by the Product team, as requested by Maya Okonkwo on 2026-08-14. The request was part of approval thread T-REPLIT-2026-08 and was ultimately blocked without a signature."
+  "cognee_preview": "CHUNKS:\n{'id': '77df8f11-bdab-5ac4-ad08-9885adf9ad8b', 'created_at': 1786726749832, 'updated_at': 1786726749832, 'ontology_valid': False, 'ontology_uri': None, 'version': 1, 'topological_rank': 0, 'metadata': {'index_fields': ['text']}, 'type': 'IndexSchema', 'belongs_to_set': [], 'source_pipeline': None, 'source_task': None, 'source_node_set': None, 'source_user': None, 'source_content_hash': None, 'feedback_weight': 0.5, 'importance_weight': 0.5, 'text': 'AI-tool approval thread T-REPLIT-2026-08.\\nTool: Replit.\\nVendor: Replit.\\nDecision: blocked.\\nNot signed.\\nRequest: @Greenlit Can Product use Replit for internal prototypes?\\nDated discussion:\\n2026-08-14T18:00:00Z Shirley Xue (Product): @Greenlit Can Product use Replit for internal prototypes? We want the frontend experiments in a browser...\n\nGRAPH_COMPLETION:\nReplit internal prototypes refer to the use of Replit, a browser-based IDE, for internal frontend development by the Product team, as requested by Shirley Xue on 2026-08-14. The request was part of approval thread T-REPLIT-2026-08 and was ultimately blocked without a signature."
 }

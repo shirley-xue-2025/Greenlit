@@ -27,6 +27,7 @@ Agents cannot set status=signed. Only Legal may move vendor_dpa_signed.
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException
@@ -174,7 +175,7 @@ def build_state() -> dict:
         "similars": _similars(catalog),
         "slack": _slack(),
         "queue": _queue(record, catalog),
-        "roles": ["Legal", "Security", "Procurement"],
+        "roles": ["Employee", "Legal", "Security", "Procurement"],
         "control_labels": labels,
         "control_order": order,
         "graph_html": GRAPH_PATH.is_file(),
@@ -205,6 +206,12 @@ def api_sign(body: SignRequest) -> dict:
     record = load_record()
     updated = apply_legal_dpa_sign(record, rationale=rationale)
     persist(updated)
+    try:
+        from slack_bot import post_legal_signed
+
+        post_legal_signed()
+    except Exception as exc:  # noqa: BLE001 — Slack must not fail the sign API
+        print(f"slack write-back skipped: {exc}", file=sys.stderr)
     return build_state()
 
 
@@ -213,6 +220,12 @@ def demo_reset() -> dict:
     envelopes = run_agents(REPLIT_REQUEST)
     record = reset_replit(envelopes=envelopes)
     persist(record)
+    try:
+        from slack_bot import reset_sign_flag
+
+        reset_sign_flag()
+    except Exception as exc:  # noqa: BLE001 — Slack must not fail reset
+        print(f"slack reset flag skipped: {exc}", file=sys.stderr)
     return build_state()
 
 

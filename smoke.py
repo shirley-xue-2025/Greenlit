@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Local smoke: Qwen chat + Qwen embeddings + Qdrant + Cognee add/search.
 
-Run from gate/ with the venv active. Uses DashScope directly.
+Run from the repo root with the venv active.
 """
 from __future__ import annotations
 

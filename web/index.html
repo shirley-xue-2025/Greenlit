@@ -58,7 +58,6 @@
     color: var(--ink);
   }
   h1 i { font-style: normal; color: var(--pink-text); }
-  .tagline { color: var(--ink); margin-top: 8px; font-size: 14px; line-height: 1.6; }
   .header-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-left: auto; }
 
   .pill {
@@ -68,11 +67,11 @@
     background: var(--card); color: var(--ink-2); cursor: pointer;
   }
   .pill .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ink-3); }
-  .pill.on { background: var(--mint); color: var(--ink); border-color: var(--mint-border); }
+  .pill.on { background: var(--card); color: var(--ink); border-color: var(--mint-border); }
   .pill.on .dot { background: var(--green-mark); }
-  .pill.blocked { background: var(--rose); color: var(--ink); border-color: var(--rose-border); cursor: default; }
+  .pill.blocked { background: var(--card); color: var(--ink); border-color: var(--rose-border); cursor: default; }
   .pill.blocked .dot { background: var(--pink-mark); }
-  .pill.signed { background: var(--mint); color: var(--ink); border-color: var(--mint-border); cursor: default; }
+  .pill.signed { background: var(--card); color: var(--ink); border-color: var(--mint-border); cursor: default; }
   .pill.signed .dot { background: var(--green-mark); }
   .btn-reset {
     padding: 6px 13px; border-radius: var(--r-pill);
@@ -85,18 +84,26 @@
     outline: 2px solid var(--green-text); outline-offset: 2px;
   }
 
-  .queue { margin-top: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+  .queue { margin-top: 0; background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+  .queue-label {
+    margin: 28px 0 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
   .queue-row {
     display: grid; grid-template-columns: 140px 100px 1fr;
     gap: 12px; padding: 12px 16px; align-items: center;
     border-bottom: 1px solid var(--line); font-size: 13.5px;
   }
   .queue-row:last-child { border-bottom: none; }
-  .queue-row.current { background: var(--rose-row); }
+  .queue-row.current { box-shadow: inset 3px 0 0 var(--pink-mark); }
   .q-tool { font-weight: 700; color: var(--ink); }
   .q-meta { color: var(--ink); font-size: 12px; }
 
-  .hero { margin-top: 24px; }
+  .hero { margin-top: 20px; }
   .hero-top { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
   .hero-tool {
     font-family: var(--font-display); font-size: 32px; font-weight: 600;
@@ -107,21 +114,24 @@
   .chip {
     display: inline-flex; align-items: center; gap: 7px;
     padding: 7px 12px; border-radius: var(--r-chip);
-    font-size: 13px; font-weight: 700;
+    font-size: 13px; font-weight: 600;
     color: var(--ink);
+    background: var(--chip-bg);
+    border: 1px solid var(--line-strong);
   }
   .chip .dot { width: 7px; height: 7px; border-radius: 50%; flex: none; }
-  .chip.inherited { background: var(--mint); border: 1px solid var(--mint-border); }
+  .chip.inherited { border-color: var(--mint-border); }
   .chip.inherited .dot { background: var(--green-mark); }
-  .chip.gap { background: var(--rose); border: 1px solid var(--rose-border); }
+  .chip.gap { border-color: var(--rose-border); }
   .chip.gap .dot { background: var(--pink-mark); }
-  .chip.na { background: var(--frame); border: 1px solid var(--line-strong); color: var(--ink-3); }
+  .chip.na { color: var(--ink-3); }
   .chip.na .dot { background: var(--ink-3); }
 
   .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 16px 0 0; }
-  .stat { background: var(--card); border: 1px solid var(--line); border-radius: var(--r-card); padding: 16px 18px; }
-  .stat.primary { border-color: var(--mint-border); background: var(--mint); }
-  .stat.gaps { border-color: var(--rose-border); background: var(--rose); }
+  .stats.two { grid-template-columns: 1fr 1fr; }
+  .stat { background: var(--card); border: 1px solid var(--line); border-radius: var(--r-card); padding: 16px 18px 16px 20px; }
+  .stat.primary { box-shadow: inset 3px 0 0 var(--green-mark); }
+  .stat.gaps { box-shadow: inset 3px 0 0 var(--pink-mark); }
   .stat-label { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); font-weight: 700; margin-bottom: 6px; }
   .stat-value {
     font-family: var(--font-display); font-size: 32px; font-weight: 600;
@@ -130,7 +140,7 @@
   .stat-hint { color: var(--ink); font-size: 12px; margin-top: 6px; line-height: 1.5; }
 
   .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r-card); padding: 18px 20px; margin-top: 16px; }
-  .card.challenger { border-color: var(--rose-border); background: var(--rose); }
+  .card.challenger { border-color: var(--line); box-shadow: inset 3px 0 0 var(--pink-mark); }
   .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 0 0 12px; }
   h2 { font-size: 15px; font-weight: 700; letter-spacing: -.01em; color: var(--ink); }
   .section-note { color: var(--ink-3); font-size: 12px; }
@@ -178,9 +188,11 @@
     padding: 4px 10px; border-radius: var(--r-pill);
     font-size: 11px; font-weight: 700; letter-spacing: .04em;
     text-transform: uppercase;
+    background: var(--chip-bg); color: var(--ink);
+    border: 1px solid var(--line-strong);
   }
-  .stance.recommend_with_gaps { background: var(--mint); color: var(--ink); border: 1px solid var(--mint-border); }
-  .stance.block_copy { background: var(--rose); color: var(--ink); border: 1px solid var(--rose-border); }
+  .stance.recommend_with_gaps { border-color: var(--mint-border); }
+  .stance.block_copy { border-color: var(--rose-border); }
 
   .graph-frame {
     width: 100%; min-height: 420px; height: 480px; border: 0;
@@ -214,12 +226,25 @@
 <div id="app"><p class="load-error">Loading approval…</p></div>
 <script>
 const ui = {
-  role: "Legal",
+  role: roleFromUrl(),
   rationale: "Replit DPA on file.",
   error: "",
   justSigned: false
 };
 let state = null;
+
+function roleFromUrl() {
+  const raw = new URLSearchParams(location.search).get("role") || "Employee";
+  const allowed = ["Employee", "Legal", "Security", "Procurement"];
+  return allowed.find((role) => role.toLowerCase() === raw.toLowerCase()) || "Employee";
+}
+
+function setRole(role) {
+  ui.role = role;
+  const url = new URL(location.href);
+  url.searchParams.set("role", role);
+  history.replaceState(null, "", url.pathname + url.search);
+}
 
 function esc(value) {
   return String(value ?? "").replace(/[&<>"']/g, (ch) => ({
@@ -250,8 +275,8 @@ function chipsHtml(record) {
 
 function stanceLabel(stance) {
   const map = {
-    recommend_with_gaps: "Recommend with gaps",
-    block_copy: "Block copy"
+    recommend_with_gaps: "Recommend: sign DPA",
+    block_copy: "Do not copy Notion"
   };
   return map[stance] || stance.replaceAll("_", " ");
 }
@@ -261,8 +286,67 @@ function lastSigner(record) {
   return signs.length ? signs[signs.length - 1] : null;
 }
 
+function isEmployee() {
+  return ui.role === "Employee";
+}
+
+function heroHint(record) {
+  const dpaDone = (record.inherited || []).includes("vendor_dpa_signed");
+  if (ui.role === "Employee") {
+    return dpaDone
+      ? "Legal signed the Replit DPA. You still cannot use Replit until Security has proof they do not keep our code."
+      : "You cannot use Replit yet. The usual checks (company login, internal use, no customer data in prompts) are already covered. Two Replit-specific things are still missing — Legal and Security own those, not you.";
+  }
+  if (ui.role === "Legal") {
+    return dpaDone
+      ? "DPA is on file. Code-retention still needs evidence. Status stays blocked."
+      : "You are Priya Chen, Legal. Shirley Xue asked to start a Replit approval. Your job is the DPA — not code-retention.";
+  }
+  if (ui.role === "Security") {
+    return dpaDone
+      ? "You are Jonas Weber, Security. Priya signed the DPA. Your gap is still open: proof Replit does not keep our code. A signature will not close it."
+      : "You are Jonas Weber, Security. Shirley Xue asked to start a Replit approval. Your job is proof they do not keep our code — not the DPA.";
+  }
+  return dpaDone
+    ? "Replit DPA is on file. Code-retention is still open — that is Security, not a contract copy-paste."
+    : "No Replit DPA is on file. Cursor's DPA does not transfer. You record vendor paper; Legal signs tonight.";
+}
+
+function visibleEnvelopes() {
+  const role = (ui.role || "").toLowerCase();
+  const envelopes = state.envelopes || [];
+  if (role === "employee") return [];
+  return envelopes.filter((env) => {
+    const name = String(env.agent || "").toLowerCase();
+    return name === "challenger" || name === role;
+  });
+}
+
+function nextStepHtml(record) {
+  const dpaDone = (record.inherited || []).includes("vendor_dpa_signed");
+  return `<section class="card">
+      <div class="section-head">
+        <h2>Your next step</h2>
+        <span class="section-note">You asked. You do not sign.</span>
+      </div>
+      <p class="body">${dpaDone
+        ? "You still cannot use Replit. Legal finished their piece. Wait for Security on code-retention. Nothing for you to upload."
+        : "You cannot use Replit yet. You do not need to upload files or sign anything. This request is with Legal and Security."}</p>
+      <div class="priors" style="margin-top:14px">
+        <div>
+          <h2>${dpaDone ? "Legal · done" : "Waiting on Legal"}</h2>
+          <p class="muted">${dpaDone ? "Replit DPA is signed." : "A signed DPA with Replit. Cursor's DPA does not count."}</p>
+        </div>
+        <div>
+          <h2>Waiting on Security</h2>
+          <p class="muted">Proof Replit does not keep Product's code. You do not provide this.</p>
+        </div>
+      </div>
+    </section>`;
+}
+
 function queueHtml() {
-  return (state.queue || []).map((row) => {
+  return (state.queue || []).filter((row) => !row.current).map((row) => {
     const current = row.current;
     const statusClass = row.status === "signed" ? "signed" : "blocked";
     const meta = current
@@ -287,7 +371,24 @@ function slackHtml() {
   return body || `<p class="muted">No request text in the corpus yet.</p>`;
 }
 
+function requesterLineHtml() {
+  const slack = state.slack || {};
+  const msg = (slack.messages || [])[0] || {};
+  const name = msg.user || "Shirley Xue";
+  const role = msg.role || "Product";
+  return `<p class="body" style="margin-top:12px"><strong>${esc(name)}</strong> · ${esc(role)} asked to start this approval.</p>`;
+}
+
 function similarsHtml() {
+  const memory = ui.role === "Security"
+    ? {
+      cursor: "Your Cursor thread, May. You required no-training-on-code. That clause is Anysphere's. It does not cover Replit.",
+      notion: "Your Notion thread, June. You told Shirley Notion is not a code tool. That DPA cannot prove Replit code-retention."
+    }
+    : {
+      cursor: "Shirley's Slack thread, May. Jonas (Security) required a DPA and no-training-on-code. You signed. That DPA is Anysphere — it does not cover Replit.",
+      notion: "Shirley's Slack thread, June. She asked to reuse Cursor. Jonas said Notion is not a code tool. You signed. Do not copy this DPA onto Replit."
+    };
   const similars = state.similars || {};
   const priors = similars.priors || [];
   if (!priors.length) return `<p class="muted">No prior approvals in the catalog.</p>`;
@@ -295,13 +396,14 @@ function similarsHtml() {
     const score = prior.score == null
       ? `<div class="prior-score pending">${esc(prior.note || "retrieval pending")}</div>`
       : `<div class="prior-score">Qdrant ${Number(prior.score).toFixed(3)}</div>`;
-    const preview = prior.preview ? `<p class="prior-preview">${esc(prior.preview)}</p>` : "";
+    const blurb = memory[prior.case_id] || prior.preview || "";
+    const preview = blurb ? `<p class="prior-preview">${esc(blurb)}</p>` : "";
     return `<div>
       <div class="section-head">
         <h2>${esc(prior.tool)}</h2>
         <span class="pill signed"><span class="dot"></span>signed</span>
       </div>
-      <p class="muted">${esc(prior.vendor)} · ${esc(prior.signed || "")}</p>
+      <p class="muted">${esc(prior.vendor)} · ${esc(prior.signed || "")} · ${ui.role === "Security" ? "you and Legal" : "you and Security"}</p>
       ${score}
       ${preview}
     </div>`;
@@ -309,8 +411,8 @@ function similarsHtml() {
 }
 
 function agentsHtml() {
-  const envelopes = state.envelopes || [];
-  if (!envelopes.length) return `<p class="muted">Specialist envelopes are not loaded yet.</p>`;
+  const envelopes = visibleEnvelopes();
+  if (!envelopes.length) return "";
   return `<div class="agents">${envelopes.map((env) => {
     const name = env.agent || env.role || "specialist";
     const stance = env.stance || "";
@@ -359,12 +461,13 @@ function graphSvg(record) {
 }
 
 function graphHtml(record) {
+  const svg = graphSvg(record);
+  const caption = `<p class="graph-caption">Who signed what. Similar is not the same vendor.</p>`;
   if (state.graph_html) {
-    return `<iframe class="graph-frame" src="/graph.html" title="Cognee provenance graph"></iframe>
-      <p class="graph-caption">Similar is not the same vendor. The graph keeps who signed what.</p>`;
+    return `${svg}${caption}
+      <iframe class="graph-frame" style="min-height:260px;height:300px" src="/graph.html" title="Cognee provenance graph"></iframe>`;
   }
-  return `${graphSvg(record)}
-    <p class="graph-caption">Inline provenance while Cognee graph HTML is still building. Similar is not the same vendor.</p>`;
+  return `${svg}${caption}`;
 }
 
 function render() {
@@ -377,13 +480,25 @@ function render() {
   const inheritedN = (rec.inherited || []).length;
   const gapsN = (rec.gaps || []).length;
   const signer = lastSigner(rec);
-  const canSign = ui.role === "Legal";
+  const employee = isEmployee();
+  const legal = ui.role === "Legal";
+  const security = ui.role === "Security";
+  const canSign = legal;
   const statusClass = rec.status === "signed" ? "signed" : "blocked";
-  const roles = (state.roles || ["Legal", "Security", "Procurement"]).map((role) =>
+  const roleList = state.roles && state.roles.length
+    ? state.roles
+    : ["Employee", "Legal", "Security", "Procurement"];
+  const roles = roleList.map((role) =>
     `<button type="button" class="pill ${ui.role === role ? "on" : ""}" data-role="${esc(role)}" aria-pressed="${ui.role === role}">
       <span class="dot"></span>${esc(role)}
     </button>`
   ).join("");
+  const agentBlock = agentsHtml();
+  const signReason = legal
+    ? "Sign records the DPA only. Replit stays blocked until Security has evidence."
+    : security
+      ? "Jonas cannot close this with a signature. Code-retention needs evidence."
+      : "Only Legal can record the DPA tonight.";
 
   root.innerHTML = `
     <div class="wrap">
@@ -395,103 +510,110 @@ function render() {
             <button type="button" class="btn-reset" id="btn-reset">Reset demo</button>
           </div>
         </div>
-        <p class="tagline">every signed AI-tool approval makes the next one faster</p>
       </header>
-
-      <div class="queue" aria-label="Approval queue">${queueHtml()}</div>
 
       <section class="hero" aria-live="polite">
         <div class="hero-top">
           <div class="hero-tool">${esc(rec.tool)}</div>
           <span class="pill ${statusClass}"><span class="dot"></span>${esc(rec.status)}</span>
         </div>
-        <p class="hero-hint">${(rec.inherited || []).includes("vendor_dpa_signed")
-            ? "DPA is now inherited. Code-retention still needs evidence. Status stays blocked."
-            : "Five org controls already carry over. Two vendor facts do not: a Replit DPA, and proof they do not keep our code."}</p>
+        <p class="hero-hint">${esc(heroHint(rec))}</p>
         <div class="chips">${chipsHtml(rec)}</div>
+        ${legal || security ? requesterLineHtml() : ""}
       </section>
 
-      <div class="stats">
+      ${employee ? `<div class="stats two">
         <div class="stat primary">
-          <div class="stat-label">Inherited</div>
+          <div class="stat-label">Already covered</div>
           <div class="stat-value ok">${inheritedN}</div>
-          <div class="stat-hint">Org controls that travel with the next tool</div>
+          <div class="stat-hint">Usual checks from Cursor and Notion. You don't re-explain these.</div>
         </div>
         <div class="stat gaps">
-          <div class="stat-label">Gaps</div>
+          <div class="stat-label">Still missing</div>
           <div class="stat-value warn">${gapsN}</div>
-          <div class="stat-hint">Pink chips are the work still open</div>
-        </div>
-        <div class="stat">
-          <div class="stat-label">Version</div>
-          <div class="stat-value">${esc(rec.version)}</div>
-          <div class="stat-hint">Hash changes when a human signs</div>
+          <div class="stat-hint">Legal and Security own these. Not you.</div>
         </div>
       </div>
+      <p class="queue-label">Earlier approvals</p>
+      <div class="queue" aria-label="Earlier approvals">${queueHtml()}</div>` : ""}
 
-      <section class="card">
+      ${legal || security ? `<section class="card">
         <div class="section-head">
-          <h2>Human sign-off</h2>
-          <span class="section-note">Agents drafted this. Nothing is active until a human signs.</span>
+          <h2>Memory from earlier Slack threads</h2>
+          <span class="section-note">${state.similars && state.similars.pending ? "Qdrant retrieval pending" : "Qdrant similar chunks"}</span>
         </div>
-        <p class="muted" style="margin-bottom:12px">Signing as Legal with a rationale moves the DPA chip only. Status stays blocked until code-retention has evidence.</p>
-        <label class="field" for="rationale">Rationale · current role ${esc(ui.role)}</label>
+        <p class="muted" style="margin-bottom:12px">${legal
+          ? "Keyword search would treat these DPAs as interchangeable. They are not."
+          : "Keyword search would treat Notion's DPA as proof Replit does not keep code. It is not."}</p>
+        ${similarsHtml()}
+      </section>` : ""}
+
+      ${legal && agentBlock ? `<div class="section-head" style="margin-top:24px">
+        <h2>What Legal should notice</h2>
+        <span class="section-note">Agent: you can sign the DPA. Challenger blocks a bad copy.</span>
+      </div>${agentBlock}` : ""}
+
+      ${security && agentBlock ? `<div class="section-head" style="margin-top:24px">
+        <h2>What Security should notice</h2>
+        <span class="section-note">Agent: a signature will not close this. Challenger blocks a bad copy.</span>
+      </div>${agentBlock}` : ""}
+
+      ${employee ? nextStepHtml(rec) : `<section class="card">
+        <div class="section-head">
+          <h2>${legal ? "Priya Chen · Legal" : security ? "Jonas Weber · Security" : "Human sign-off"}</h2>
+          <span class="section-note">${legal ? "No Reject on this desk. Sign records the DPA." : security ? "No signature closes this gap." : "This is not your signature tonight."}</span>
+        </div>
+        <p class="muted" style="margin-bottom:12px">${legal
+          ? "Agent recommendation: sign the Replit DPA. That does not approve Replit for use. Code-retention stays with Security (Jonas Weber)."
+          : security
+            ? "Do not sign. Your gap needs evidence that Replit does not keep our code. The DPA is Priya's."
+            : "Do not sign. Legal records the DPA. You keep the vendor file."}</p>
+        <label class="field" for="rationale">Rationale · ${esc(ui.role)}</label>
         <textarea id="rationale" maxlength="500">${esc(ui.rationale)}</textarea>
         <div class="sign-row">
           <button type="button" class="btn-sign" id="btn-sign" ${canSign ? "" : "disabled"}>Sign</button>
-          ${canSign
-            ? `<span class="sign-reason">Legal can close the DPA gap. Code-retention stays open.</span>`
-            : `<span class="sign-reason">Only Legal can close the DPA gap tonight. Code-retention still needs evidence.</span>`}
+          <span class="sign-reason">${esc(signReason)}</span>
         </div>
         ${ui.error ? `<p class="sign-error" style="margin-top:8px">${esc(ui.error)}</p>` : ""}
         ${ui.justSigned || signer ? `<p class="version-line">v${esc(rec.version)} · ${esc(shortHash(rec.content_hash))}${signer ? " · " + esc(signer.signer) : ""}</p>` : ""}
-      </section>
+      </section>`}
 
-      <section class="card">
-        <div class="section-head">
-          <h2>Request in Slack</h2>
-          <span class="section-note">Synthetic corpus · live Slack is optional tonight</span>
-        </div>
-        ${slackHtml()}
-      </section>
-
-      <section class="card">
+      ${!employee && !legal && !security ? `<section class="card">
         <div class="section-head">
           <h2>Similar prior approvals</h2>
-          <span class="section-note">${state.similars && state.similars.pending ? "Qdrant retrieval pending" : "Qdrant similar chunks"}</span>
+          <span class="section-note">Qdrant similar chunks</span>
         </div>
         ${similarsHtml()}
-      </section>
+      </section>` : ""}
 
-      <div class="section-head" style="margin-top:24px">
-        <h2>Specialist envelopes</h2>
-        <span class="section-note">Challenger is a peer, not a footnote</span>
-      </div>
-      ${agentsHtml()}
+      ${!legal && !security && agentBlock ? `<div class="section-head" style="margin-top:24px">
+        <h2>Your envelope and the Challenger</h2>
+        <span class="section-note">Only this role's mandate plus the copy-block</span>
+      </div>${agentBlock}` : ""}
 
-      <section class="card">
+      ${employee ? "" : `<section class="card">
         <div class="section-head">
-          <h2>Provenance graph</h2>
-          <span class="section-note">${state.graph_html ? "Cognee graph" : "Catalog relations"}</span>
+          <h2>Who signed what</h2>
+          <span class="section-note">${state.graph_html ? "Cognee provenance" : "Catalog relations"}</span>
         </div>
         ${graphHtml(rec)}
-      </section>
+      </section>`}
     </div>
-    <footer class="audit">
+    ${employee ? "" : `<footer class="audit">
       <div><strong>Version</strong>${esc(rec.version)}</div>
       <div><strong>Hash</strong><span class="mono" title="${esc(rec.content_hash)}">${esc(shortHash(rec.content_hash))}</span></div>
       <div><strong>Source thread</strong>${esc(rec.source_thread_id)}</div>
       <div><strong>Signer</strong>${signer ? esc(signer.signer) : "none yet"}</div>
       <div><strong>Updated</strong>${esc(rec.updated_at || "")}</div>
-    </footer>
+    </footer>`}
   `;
 
   root.querySelectorAll("[data-role]").forEach((btn) => {
     btn.addEventListener("click", () => {
-      ui.role = btn.getAttribute("data-role");
-      ui.error = "";
       const box = document.getElementById("rationale");
       if (box) ui.rationale = box.value;
+      setRole(btn.getAttribute("data-role"));
+      ui.error = "";
       render();
     });
   });

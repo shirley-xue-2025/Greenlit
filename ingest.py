@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Ingest the three Greenlit corpus threads into Cognee + Qdrant.
 
-Run from gate/:  .venv/bin/python ingest.py
+Run from the repo root:  python ingest.py
 """
 from __future__ import annotations
 

@@ -8,7 +8,7 @@
   "signers": ["Priya Chen, Legal", "Jonas Weber, Security"],
   "messages": [
     {
-      "user": "Maya Okonkwo",
+      "user": "Shirley Xue",
       "role": "Product",
       "ts": "2026-05-08T09:12:00Z",
       "text": "Can Engineering use Cursor for internal IDE work? Same problem as the last coding-assistant request: we need something in the editor, not a chat tab."
@@ -29,7 +29,7 @@
       "user": "Priya Chen",
       "role": "Legal",
       "ts": "2026-05-12T16:40:00Z",
-      "text": "Legal signs Cursor for Engineering, owner Maya Okonkwo, internal IDE use only. Conditions: no customer PII in prompts; company SSO; 6-month prompt audit; Anysphere DPA on file; no-training-on-code annex. This DPA does not cover any other vendor."
+      "text": "Legal signs Cursor for Engineering, owner Shirley Xue, internal IDE use only. Conditions: no customer PII in prompts; company SSO; 6-month prompt audit; Anysphere DPA on file; no-training-on-code annex. This DPA does not cover any other vendor."
     }
   ]
 }

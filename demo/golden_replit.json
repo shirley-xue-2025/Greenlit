@@ -3,7 +3,7 @@
     "replit",
     "prototype"
   ],
-  "request": "@Greenlit Can Product use Replit for internal prototypes?",
+  "request": "@Greenlit I want to use Replit for internal prototypes. Can you help with the approval?",
   "envelopes": [
     {
       "agent": "legal",
@@ -19,7 +19,7 @@
         "vendor_dpa_signed",
         "no_training_on_code"
       ],
-      "natural_language": "Replit lacks a signed DPA and does not prohibit training on code, which violates our vendor control requirements. Even though internal use is permitted, the absence of these two critical vendor safeguards prevents approval."
+      "natural_language": "You can sign a Replit DPA tonight. Five company rules already apply from Shirley's Cursor and Notion threads. Cursor's Anysphere DPA does not transfer. Notion's DPA is not evidence for a code tool. Signing does not approve Replit for use — code-retention stays with Security."
     },
     {
       "agent": "security",
@@ -35,7 +35,7 @@
         "vendor_dpa_signed",
         "no_training_on_code"
       ],
-      "natural_language": "While Replit meets our internal security controls, the lack of a signed DPA and the risk of code being used for model training pose unacceptable data and compliance risks. These gaps cannot be mitigated without additional safeguards."
+      "natural_language": "You can require proof that Replit does not keep Product's code. You required that clause on Cursor. Notion is not a code tool — its DPA cannot prove this. A signature will not close the gap. The DPA is Legal's."
     },
     {
       "agent": "procurement",
