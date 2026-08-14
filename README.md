@@ -39,9 +39,14 @@ sign-off, and the hashed audit trail. There is no generic query box.
    `qdrant-memory`).
 2. Copy `.env.example` to `.env` and add a DashScope international key.
 3. Python 3.12 venv, then `pip install -r requirements.txt`.
-4. `python smoke.py` — chat, embeddings, Qdrant, Cognee add → cognify → search.
+4. `python ingest.py` — corpus into Cognee + Qdrant. Then
+   `python retrieve.py "Replit internal prototypes"` — Cursor should rank
+   above Notion.
+5. `python serve.py` — approval screen at http://127.0.0.1:8765/
+   Legal sign moves only the DPA chip. `POST /demo/reset` between takes.
 
-`EMBEDDING_BATCH_SIZE` must stay `10` (DashScope cap). Import
+`python smoke.py` still checks chat, embeddings, Qdrant, and a tiny Cognee
+round-trip. `EMBEDDING_BATCH_SIZE` must stay `10` (DashScope cap). Import
 `cognee_community_vector_adapter_qdrant.register` as a **module** for
 side-effect registration — do not call `register()`.
 

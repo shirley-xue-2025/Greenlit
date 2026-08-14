@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Greenlit — Replit approval</title>
+<style>
+  :root {
+    --paper: #0D1F16;
+    --card: #163426;
+    --frame: #1D4231;
+    --line: #21402F;
+    --line-strong: #2A4E3C;
+    --ink: #EAF3EC;
+    --ink-2: #C3D9C8;
+    --ink-3: #9BBBA5;
+    --green-text: #9FDDB6;
+    --pink-text: #F3AFD0;
+    --amber-text: #E8C079;
+    --link: #A7E3BF;
+    --green-mark: #2E9E63;
+    --pink-mark: #D45C96;
+    --amber-mark: #D69A36;
+    --mint: #1A3D2C;
+    --mint-border: #2E5B42;
+    --rose: #2A1D26;
+    --rose-border: #4A2F40;
+    --mint-row: #17372A;
+    --rose-row: #291B25;
+    --chip-bg: #234A37;
+    --r-card: 16px;
+    --r-pill: 99px;
+    --r-chip: 7px;
+    --font-display: Futura, "Avenir Next", sans-serif;
+    --font-body: "Avenir Next", Avenir, -apple-system, sans-serif;
+    --font-mono: "SF Mono", Menlo, monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--paper);
+    font-family: var(--font-body);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  h1, h2, h3, h4 { text-wrap: balance; }
+  p, li { text-wrap: pretty; }
+  button, textarea { font-family: inherit; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 24px 32px 96px; }
+  .mono { font-family: var(--font-mono); }
+
+  .brand-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+  h1 {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -.01em;
+    color: var(--ink);
+  }
+  h1 i { font-style: normal; color: var(--pink-text); }
+  .tagline { color: var(--ink-2); margin-top: 8px; font-size: 14px; line-height: 1.6; }
+  .header-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-left: auto; }
+
+  .pill {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 6px 13px; border-radius: var(--r-pill);
+    font-size: 12px; font-weight: 700; border: 1px solid var(--line-strong);
+    background: var(--card); color: var(--ink-2); cursor: pointer;
+  }
+  .pill .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ink-3); }
+  .pill.on { background: var(--mint); color: var(--green-text); border-color: var(--mint-border); }
+  .pill.on .dot { background: var(--green-mark); }
+  .pill.blocked { background: var(--rose); color: var(--pink-text); border-color: var(--rose-border); cursor: default; }
+  .pill.blocked .dot { background: var(--pink-mark); }
+  .pill.signed { background: var(--mint); color: var(--green-text); border-color: var(--mint-border); cursor: default; }
+  .pill.signed .dot { background: var(--green-mark); }
+  .btn-reset {
+    padding: 6px 13px; border-radius: var(--r-pill);
+    font-size: 12px; font-weight: 700; cursor: pointer;
+    background: transparent; color: var(--ink-2);
+    border: 1px solid var(--line-strong);
+  }
+  .btn-reset:hover, .pill:hover { border-color: var(--mint-border); }
+  .btn-reset:focus-visible, .pill:focus-visible, .btn-sign:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--green-text); outline-offset: 2px;
+  }
+
+  .queue { margin-top: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+  .queue-row {
+    display: grid; grid-template-columns: 140px 100px 1fr;
+    gap: 12px; padding: 12px 16px; align-items: center;
+    border-bottom: 1px solid var(--line); font-size: 13.5px;
+  }
+  .queue-row:last-child { border-bottom: none; }
+  .queue-row.current { background: var(--rose-row); }
+  .queue-row.prior { background: var(--mint-row); }
+  .q-tool { font-weight: 700; color: var(--ink); }
+  .q-meta { color: var(--ink-2); font-size: 12px; }
+
+  .hero { margin-top: 24px; }
+  .hero-top { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+  .hero-tool {
+    font-family: var(--font-display); font-size: 32px; font-weight: 600;
+    letter-spacing: -.01em; color: var(--ink);
+  }
+  .hero-hint { margin-top: 8px; color: var(--ink-2); font-size: 14.5px; line-height: 1.6; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 7px 12px; border-radius: var(--r-chip);
+    font-size: 12px; font-weight: 700;
+  }
+  .chip .dot { width: 7px; height: 7px; border-radius: 50%; flex: none; }
+  .chip.inherited { background: var(--mint); border: 1px solid var(--mint-border); color: var(--green-text); }
+  .chip.inherited .dot { background: var(--green-mark); }
+  .chip.gap { background: var(--rose); border: 1px solid var(--rose-border); color: var(--pink-text); }
+  .chip.gap .dot { background: var(--pink-mark); }
+  .chip.na { background: var(--frame); border: 1px solid var(--line-strong); color: var(--ink-3); }
+  .chip.na .dot { background: var(--ink-3); }
+
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 16px 0 0; }
+  .stat { background: var(--card); border: 1px solid var(--line); border-radius: var(--r-card); padding: 16px 18px; }
+  .stat.primary { border-color: var(--mint-border); background: var(--mint); }
+  .stat.gaps { border-color: var(--rose-border); background: var(--rose); }
+  .stat-label { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); font-weight: 700; margin-bottom: 6px; }
+  .stat-value {
+    font-family: var(--font-display); font-size: 32px; font-weight: 600;
+    letter-spacing: -.01em; font-variant-numeric: tabular-nums; color: var(--ink);
+  }
+  .stat-value.ok { color: var(--green-text); }
+  .stat-value.warn { color: var(--pink-text); }
+  .stat-hint { color: var(--ink-2); font-size: 12px; margin-top: 6px; line-height: 1.5; }
+
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r-card); padding: 18px 20px; margin-top: 16px; }
+  .card.challenger { border-color: var(--rose-border); background: var(--rose); }
+  .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 0 0 12px; }
+  h2 { font-size: 15px; font-weight: 700; letter-spacing: -.01em; color: var(--ink); }
+  .section-note { color: var(--ink-3); font-size: 12px; }
+  .body { color: var(--ink); font-size: 14.5px; line-height: 1.6; }
+  .muted { color: var(--ink-2); font-size: 13px; line-height: 1.6; }
+
+  label.field { display: block; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); font-weight: 700; margin-bottom: 8px; }
+  textarea {
+    width: 100%; min-height: 72px; resize: vertical;
+    background: var(--frame); color: var(--ink);
+    border: 1px solid var(--line-strong); border-radius: 12px;
+    padding: 12px; font-size: 14.5px; line-height: 1.5;
+  }
+  .sign-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 12px; }
+  .btn-sign {
+    padding: 8px 16px; border-radius: var(--r-pill);
+    font-size: 13px; font-weight: 700; cursor: pointer;
+    background: var(--mint); color: var(--green-text);
+    border: 1px solid var(--mint-border);
+  }
+  .btn-sign:disabled {
+    cursor: not-allowed;
+    background: var(--frame);
+    color: var(--ink-3);
+    border-color: var(--line-strong);
+    opacity: 1;
+  }
+  .sign-reason { color: var(--ink-2); font-size: 13px; line-height: 1.5; }
+  .sign-error { color: var(--amber-text); font-size: 13px; }
+  .version-line { margin-top: 12px; color: var(--ink-2); font-size: 12px; font-family: var(--font-mono); line-height: 1.6; }
+
+  .slack-msg { padding: 12px; background: var(--frame); border-radius: 12px; border: 1px solid var(--line); }
+  .slack-who { font-size: 13px; font-weight: 700; color: var(--ink); }
+  .slack-meta { color: var(--ink-3); font-size: 12px; font-weight: 400; margin-left: 8px; }
+  .slack-text { margin-top: 8px; color: var(--ink); font-size: 14.5px; line-height: 1.6; }
+
+  .priors { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .prior-score { font-family: var(--font-mono); font-size: 12px; color: var(--green-text); }
+  .prior-score.pending { color: var(--ink-3); }
+  .prior-preview { margin-top: 8px; color: var(--ink-2); font-size: 12px; line-height: 1.55; }
+
+  .agents { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+  .stance {
+    display: inline-flex; align-items: center;
+    padding: 4px 10px; border-radius: var(--r-pill);
+    font-size: 11px; font-weight: 700; letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+  .stance.recommend_with_gaps { background: var(--mint); color: var(--green-text); border: 1px solid var(--mint-border); }
+  .stance.block_copy { background: var(--rose); color: var(--pink-text); border: 1px solid var(--rose-border); }
+
+  .graph-frame {
+    width: 100%; min-height: 420px; height: 480px; border: 0;
+    border-radius: 12px; background: var(--frame);
+  }
+  .graph-svg { width: 100%; height: auto; display: block; }
+  .graph-caption { margin-top: 8px; color: var(--ink-2); font-size: 12px; line-height: 1.5; }
+
+  .audit {
+    position: sticky; bottom: 0; z-index: 20;
+    background: var(--card); border-top: 1px solid var(--line-strong);
+    padding: 12px 32px;
+    display: flex; flex-wrap: wrap; gap: 8px 24px;
+    font-size: 12px; color: var(--ink-2);
+  }
+  .audit strong {
+    color: var(--ink-3); font-weight: 700; margin-right: 7px;
+    font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+  }
+  .load-error { padding: 24px 32px; color: var(--amber-text); }
+
+  @media (max-width: 760px) {
+    .wrap { padding: 20px 18px 88px; }
+    .stats, .priors, .agents { grid-template-columns: 1fr; }
+    .queue-row { grid-template-columns: 1fr; gap: 4px; }
+    .audit { padding: 12px 18px; }
+  }
+</style>
+</head>
+<body data-surface="dark">
+<div id="app"><p class="load-error">Loading approval…</p></div>
+<script>
+const ui = {
+  role: "Legal",
+  rationale: "Replit DPA on file.",
+  error: "",
+  justSigned: false
+};
+let state = null;
+
+function esc(value) {
+  return String(value ?? "").replace(/[&<>"']/g, (ch) => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  }[ch]));
+}
+
+function shortHash(hash) {
+  const raw = String(hash || "");
+  if (raw.length <= 20) return raw;
+  return raw.slice(0, 19) + "…";
+}
+
+function chipKind(id, record) {
+  if ((record.inherited || []).includes(id)) return "inherited";
+  if ((record.gaps || []).includes(id)) return "gap";
+  return "na";
+}
+
+function chipsHtml(record) {
+  const labels = state.control_labels || {};
+  const order = state.control_order || [];
+  return order.map((id) => {
+    const kind = chipKind(id, record);
+    return `<span class="chip ${kind}"><span class="dot"></span>${esc(labels[id] || id)}</span>`;
+  }).join("");
+}
+
+function stanceLabel(stance) {
+  const map = {
+    recommend_with_gaps: "Recommend with gaps",
+    block_copy: "Block copy"
+  };
+  return map[stance] || stance.replaceAll("_", " ");
+}
+
+function lastSigner(record) {
+  const signs = record.human_signoffs || [];
+  return signs.length ? signs[signs.length - 1] : null;
+}
+
+function queueHtml() {
+  return (state.queue || []).map((row) => {
+    const current = row.current;
+    const statusClass = row.status === "signed" ? "signed" : "blocked";
+    const meta = current
+      ? "This request · vendor facts still open"
+      : `${esc(row.vendor)} · signed ${esc(row.signed || "")}`;
+    return `<div class="queue-row ${current ? "current" : "prior"}">
+      <div class="q-tool">${esc(row.tool)}</div>
+      <span class="pill ${statusClass}"><span class="dot"></span>${esc(row.status)}</span>
+      <div class="q-meta">${meta}</div>
+    </div>`;
+  }).join("");
+}
+
+function slackHtml() {
+  const slack = state.slack || {};
+  const msgs = slack.messages || [];
+  const body = msgs.map((msg) => `
+    <div class="slack-msg">
+      <div class="slack-who">${esc(msg.user)} <span class="slack-meta">${esc(msg.role)} · ${esc((msg.ts || "").replace("T", " ").replace("Z", " UTC"))}</span></div>
+      <p class="slack-text">${esc(msg.text)}</p>
+    </div>`).join("");
+  return body || `<p class="muted">No request text in the corpus yet.</p>`;
+}
+
+function similarsHtml() {
+  const similars = state.similars || {};
+  const priors = similars.priors || [];
+  if (!priors.length) return `<p class="muted">No prior approvals in the catalog.</p>`;
+  return `<div class="priors">${priors.map((prior) => {
+    const score = prior.score == null
+      ? `<div class="prior-score pending">${esc(prior.note || "retrieval pending")}</div>`
+      : `<div class="prior-score">Qdrant ${Number(prior.score).toFixed(3)}</div>`;
+    const preview = prior.preview ? `<p class="prior-preview">${esc(prior.preview)}</p>` : "";
+    return `<div>
+      <div class="section-head">
+        <h2>${esc(prior.tool)}</h2>
+        <span class="pill signed"><span class="dot"></span>signed</span>
+      </div>
+      <p class="muted">${esc(prior.vendor)} · ${esc(prior.signed || "")}</p>
+      ${score}
+      ${preview}
+    </div>`;
+  }).join("")}</div>`;
+}
+
+function agentsHtml() {
+  const envelopes = state.envelopes || [];
+  if (!envelopes.length) return `<p class="muted">Specialist envelopes are not loaded yet.</p>`;
+  return `<div class="agents">${envelopes.map((env) => {
+    const name = env.agent || env.role || "specialist";
+    const stance = env.stance || "";
+    const isChallenger = String(name).toLowerCase() === "challenger";
+    return `<section class="card ${isChallenger ? "challenger" : ""}" style="margin-top:0">
+      <div class="section-head">
+        <h2>${esc(String(name).charAt(0).toUpperCase() + String(name).slice(1))}</h2>
+        <span class="stance ${esc(stance)}">${esc(stanceLabel(stance))}</span>
+      </div>
+      <p class="body">${esc(env.natural_language || "")}</p>
+    </section>`;
+  }).join("")}</div>`;
+}
+
+function graphSvg(record) {
+  const signer = lastSigner(record);
+  const dpaDone = (record.inherited || []).includes("vendor_dpa_signed");
+  const replitCtrl = dpaDone ? "5 org + DPA inherited · code gap" : "5 org inherited · 2 vendor gaps";
+  const replitWho = signer ? signer.signer : "awaiting Legal on DPA";
+  const rows = [
+    ["Cursor", "Anysphere", "7 controls met", "Priya Chen, Legal", "signed"],
+    ["Notion AI", "Notion Labs", "DPA on file · code n/a", "Priya Chen, Legal", "signed"],
+    ["Replit", "Replit", replitCtrl, replitWho, record.status || "blocked"]
+  ];
+  const colX = [16, 220, 424, 668, 900];
+  const labels = ["Tool", "Vendor", "Control", "Evidence / signer", "Decision"];
+  let nodes = labels.map((lab, i) =>
+    `<text x="${colX[i] + 90}" y="18" text-anchor="middle" fill="#9BBBA5" font-size="11" font-weight="700" letter-spacing="0.08em">${lab.toUpperCase()}</text>`
+  ).join("");
+  rows.forEach((cols, r) => {
+    const y = 36 + r * 88;
+    const blocked = cols[4] === "blocked";
+    cols.forEach((text, c) => {
+      const x = colX[c];
+      const fill = blocked && c === 4 ? "#2A1D26" : (blocked ? "#1D4231" : "#1A3D2C");
+      const stroke = blocked && c === 4 ? "#4A2F40" : "#2E5B42";
+      const ink = blocked && c === 4 ? "#F3AFD0" : "#EAF3EC";
+      nodes += `<rect x="${x}" y="${y}" width="180" height="56" rx="12" fill="${fill}" stroke="${stroke}"/>`;
+      nodes += `<text x="${x + 90}" y="${y + 34}" text-anchor="middle" fill="${ink}" font-size="12" font-weight="700">${esc(text)}</text>`;
+      if (c < 4) {
+        nodes += `<text x="${x + 188}" y="${y + 36}" fill="#9BBBA5" font-size="14">→</text>`;
+      }
+    });
+  });
+  return `<svg class="graph-svg" viewBox="0 0 1100 300" role="img" aria-label="Tool to vendor to control to signer to decision. Cursor and Notion signed. Replit blocked.">${nodes}</svg>`;
+}
+
+function graphHtml(record) {
+  if (state.graph_html) {
+    return `<iframe class="graph-frame" src="/graph.html" title="Cognee provenance graph"></iframe>
+      <p class="graph-caption">Similar is not the same vendor. The graph keeps who signed what.</p>`;
+  }
+  return `${graphSvg(record)}
+    <p class="graph-caption">Inline provenance while Cognee graph HTML is still building. Similar is not the same vendor.</p>`;
+}
+
+function render() {
+  const root = document.getElementById("app");
+  if (!state || !state.record) {
+    root.innerHTML = `<p class="load-error">${esc(ui.error || "No approval record yet.")}</p>`;
+    return;
+  }
+  const rec = state.record;
+  const inheritedN = (rec.inherited || []).length;
+  const gapsN = (rec.gaps || []).length;
+  const signer = lastSigner(rec);
+  const canSign = ui.role === "Legal";
+  const statusClass = rec.status === "signed" ? "signed" : "blocked";
+  const roles = (state.roles || ["Legal", "Security", "Procurement"]).map((role) =>
+    `<button type="button" class="pill ${ui.role === role ? "on" : ""}" data-role="${esc(role)}" aria-pressed="${ui.role === role}">
+      <span class="dot"></span>${esc(role)}
+    </button>`
+  ).join("");
+
+  root.innerHTML = `
+    <div class="wrap">
+      <header>
+        <div class="brand-row">
+          <h1>Green<i>lit</i></h1>
+          <div class="header-actions">
+            ${roles}
+            <button type="button" class="btn-reset" id="btn-reset">Reset demo</button>
+          </div>
+        </div>
+        <p class="tagline">every signed AI-tool approval makes the next one faster</p>
+      </header>
+
+      <div class="queue" aria-label="Approval queue">${queueHtml()}</div>
+
+      <section class="hero" aria-live="polite">
+        <div class="hero-top">
+          <div class="hero-tool">${esc(rec.tool)}</div>
+          <span class="pill ${statusClass}"><span class="dot"></span>${esc(rec.status)}</span>
+        </div>
+        <p class="hero-hint">${(rec.inherited || []).includes("vendor_dpa_signed")
+            ? "DPA is now inherited. Code-retention still needs evidence. Status stays blocked."
+            : "Five org controls already carry over. Two vendor facts do not: a Replit DPA, and proof they do not keep our code."}</p>
+        <div class="chips">${chipsHtml(rec)}</div>
+      </section>
+
+      <div class="stats">
+        <div class="stat primary">
+          <div class="stat-label">Inherited</div>
+          <div class="stat-value ok">${inheritedN}</div>
+          <div class="stat-hint">Org controls that travel with the next tool</div>
+        </div>
+        <div class="stat gaps">
+          <div class="stat-label">Gaps</div>
+          <div class="stat-value warn">${gapsN}</div>
+          <div class="stat-hint">Pink chips are the work still open</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Version</div>
+          <div class="stat-value">${esc(rec.version)}</div>
+          <div class="stat-hint">Hash changes when a human signs</div>
+        </div>
+      </div>
+
+      <section class="card">
+        <div class="section-head">
+          <h2>Human sign-off</h2>
+          <span class="section-note">Agents drafted this. Nothing is active until a human signs.</span>
+        </div>
+        <p class="muted" style="margin-bottom:12px">Signing as Legal with a rationale moves the DPA chip only. Status stays blocked until code-retention has evidence.</p>
+        <label class="field" for="rationale">Rationale · current role ${esc(ui.role)}</label>
+        <textarea id="rationale" maxlength="500">${esc(ui.rationale)}</textarea>
+        <div class="sign-row">
+          <button type="button" class="btn-sign" id="btn-sign" ${canSign ? "" : "disabled"}>Sign</button>
+          ${canSign
+            ? `<span class="sign-reason">Legal can close the DPA gap. Code-retention stays open.</span>`
+            : `<span class="sign-reason">Only Legal can close the DPA gap tonight. Code-retention still needs evidence.</span>`}
+        </div>
+        ${ui.error ? `<p class="sign-error" style="margin-top:8px">${esc(ui.error)}</p>` : ""}
+        ${ui.justSigned || signer ? `<p class="version-line">v${esc(rec.version)} · ${esc(shortHash(rec.content_hash))}${signer ? " · " + esc(signer.signer) : ""}</p>` : ""}
+      </section>
+
+      <section class="card">
+        <div class="section-head">
+          <h2>Request in Slack</h2>
+          <span class="section-note">Synthetic corpus · live Slack is optional tonight</span>
+        </div>
+        ${slackHtml()}
+      </section>
+
+      <section class="card">
+        <div class="section-head">
+          <h2>Similar prior approvals</h2>
+          <span class="section-note">${state.similars && state.similars.pending ? "Qdrant retrieval pending" : "Qdrant similar chunks"}</span>
+        </div>
+        ${similarsHtml()}
+      </section>
+
+      <div class="section-head" style="margin-top:24px">
+        <h2>Specialist envelopes</h2>
+        <span class="section-note">Challenger is a peer, not a footnote</span>
+      </div>
+      ${agentsHtml()}
+
+      <section class="card">
+        <div class="section-head">
+          <h2>Provenance graph</h2>
+          <span class="section-note">${state.graph_html ? "Cognee graph" : "Catalog relations"}</span>
+        </div>
+        ${graphHtml(rec)}
+      </section>
+    </div>
+    <footer class="audit">
+      <div><strong>Version</strong>${esc(rec.version)}</div>
+      <div><strong>Hash</strong><span class="mono" title="${esc(rec.content_hash)}">${esc(shortHash(rec.content_hash))}</span></div>
+      <div><strong>Source thread</strong>${esc(rec.source_thread_id)}</div>
+      <div><strong>Signer</strong>${signer ? esc(signer.signer) : "none yet"}</div>
+      <div><strong>Updated</strong>${esc(rec.updated_at || "")}</div>
+    </footer>
+  `;
+
+  root.querySelectorAll("[data-role]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      ui.role = btn.getAttribute("data-role");
+      ui.error = "";
+      const box = document.getElementById("rationale");
+      if (box) ui.rationale = box.value;
+      render();
+    });
+  });
+  const box = document.getElementById("rationale");
+  if (box) box.addEventListener("input", () => { ui.rationale = box.value; });
+  const signBtn = document.getElementById("btn-sign");
+  if (signBtn) signBtn.addEventListener("click", onSign);
+  const resetBtn = document.getElementById("btn-reset");
+  if (resetBtn) resetBtn.addEventListener("click", onReset);
+}
+
+async function parseJson(res) {
+  const type = res.headers.get("content-type") || "";
+  if (type.includes("application/json")) return res.json();
+  return { detail: await res.text() };
+}
+
+async function load() {
+  try {
+    const res = await fetch("/api/state", { cache: "no-store" });
+    state = await parseJson(res);
+    ui.error = "";
+    render();
+  } catch (err) {
+    ui.error = "Could not load approval state.";
+    render();
+  }
+}
+
+async function onSign() {
+  const box = document.getElementById("rationale");
+  if (box) ui.rationale = box.value;
+  ui.error = "";
+  try {
+    const res = await fetch("/api/sign", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      cache: "no-store",
+      body: JSON.stringify({ role: ui.role, rationale: ui.rationale })
+    });
+    const data = await parseJson(res);
+    if (!res.ok) {
+      const detail = data.detail;
+      ui.error = typeof detail === "string" ? detail : "Sign was rejected.";
+      render();
+      return;
+    }
+    state = data;
+    ui.justSigned = true;
+    ui.error = "";
+    render();
+  } catch (err) {
+    ui.error = "Sign request failed.";
+    render();
+  }
+}
+
+async function onReset() {
+  ui.error = "";
+  ui.justSigned = false;
+  ui.rationale = "Replit DPA on file.";
+  try {
+    const res = await fetch("/demo/reset", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      cache: "no-store",
+      body: "{}"
+    });
+    state = await parseJson(res);
+    render();
+  } catch (err) {
+    ui.error = "Reset failed.";
+    render();
+  }
+}
+
+load();
+</script>
+</body>
+</html>

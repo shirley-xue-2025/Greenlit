@@ -6,3 +6,4 @@ __pycache__/
 .cognee_system/
 qdrant_storage/
 .DS_Store
+demo/state.json
