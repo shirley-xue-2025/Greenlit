@@ -2,11 +2,11 @@
 
 **Every signed AI-tool approval makes the next one faster.**
 
+Cognee × Qdrant hack night — Berlin, 14 August 2026.
+
 Teams start over every time someone asks for a new AI tool, because the last privacy contract is buried in Slack. Greenlit turns that Slack request into a signed record the next request can reuse: company checks that still apply are already covered; only what is new about this company stays open.
 
 > The chatbot can recommend. It cannot approve.
-
-Cognee × Qdrant hack night — Berlin, 14 August 2026.
 
 ## The question
 
@@ -14,21 +14,15 @@ Cognee × Qdrant hack night — Berlin, 14 August 2026.
 @Greenlit I want to use Replit for internal prototypes. Can you help with the approval?
 ```
 
-This is the third AI-tool request. Cursor already got a yes (a month of Slack, then saved). Notion already got a yes (days, not a month — people still pasted terms). Tonight is Replit.
+## Search finds Cursor and Notion. It cannot tell what still applies.
 
-Searching Slack for “privacy contract” or “approval” finds Cursor and Notion. They look like the answer. They are not: a past yes is not reusable just because the words match. Keyword search cannot tell which parts still apply to a different company and which would be a false copy. Cursor’s contract is with a different company. Notion is not a coding tool, so it cannot prove Replit will not keep our code.
+This is the third request. Cursor already got a yes (a month of Slack, then saved). Notion already got a yes (days, not a month — people still pasted terms). Tonight is Replit.
 
-## What you will see
+Searching Slack for “privacy contract” or “approval” finds those two yeses. They look like the answer. They are not: a past yes is not reusable just because the words match. Cursor’s contract is with a different company. Notion is not a coding tool, so it cannot prove Replit will not keep our code.
 
-Two earlier approvals already got a yes (Cursor, Notion AI). Tonight someone asks for Replit.
+![Legal desk: Replit not approved yet. Five checks already covered, two still open. Qdrant ranks Cursor above Notion. Do not copy Notion’s privacy contract.](docs/legal-desk.png)
 
-1. **Five checks already covered, two still open.** Green dots = already done. Pink dots = still missing: a privacy contract with Replit (Legal), and proof Replit does not keep our code (Security).
-2. **Qdrant** finds similar past approvals. Cursor ranks above Notion because both are coding tools.
-3. **Cognee** remembers who signed what for which company. Similar is not the same company.
-4. **Do not copy.** Notion had a privacy contract. It is not a coding tool. Do not reuse it for Replit.
-5. **Legal can sign the privacy contract.** Replit is still not approved until Security has proof about the code. The chatbot cannot mark it approved.
-
-Slack is where people talk. The web page is where someone signs. There is no search box.
+Qdrant finds similar past approvals (Cursor 0.467, Notion 0.438). Cognee remembers who signed what for which company. Legal can file Replit’s privacy contract. That does not copy Notion’s, and it does not approve Replit for use. A person has to sign. There is no search box.
 
 ## Stack
 
