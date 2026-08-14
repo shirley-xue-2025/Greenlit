@@ -8,12 +8,12 @@
     },
     {
       "score": 0.46686047,
-      "preview": "AI-tool approval thread T-CURSOR-2026-05. Tool: Cursor. Vendor: Anysphere. Decision: signed. Signed at: 2026-05-12T16:40:00Z. Signers: Priya Chen, Legal; Jonas Weber, Security. Dated discussion: 2026-05-08T09:12:00Z Shirley Xue (Product): Can Engineering use Cursor for intern...",
+      "preview": "AI-tool approval thread T-CURSOR-2026-05. Tool: Cursor. Vendor: Anysphere. Decision: signed. Signed at: 2026-05-12T16:40:00Z. Signers: Priya Chen, Legal; Jonas Weber, Security. Dated discussion: 2026-04-08T09:07:00Z Lena Hofmann (Engineering): Can we just use Cursor...",
       "tool_guess": "Cursor"
     },
     {
       "score": 0.4384547,
-      "preview": "AI-tool approval thread T-NOTION-2026-06. Tool: Notion AI. Vendor: Notion Labs. Decision: signed. Signed at: 2026-06-03T10:15:00Z. Signers: Priya Chen, Legal; Jonas Weber, Security. Dated discussion: 2026-05-28T13:40:00Z Shirley Xue (Product): Product wants Notion AI in the t...",
+      "preview": "AI-tool approval thread T-NOTION-2026-06. Tool: Notion AI. Vendor: Notion Labs. Decision: signed. Signed at: 2026-06-03T10:15:00Z. Signers: Priya Chen, Legal; Jonas Weber, Security. Dated discussion: 2026-05-28T13:40:00Z Nina Berg (Product): Product wants Notion AI in the t...",
       "tool_guess": "Notion"
     }
   ],

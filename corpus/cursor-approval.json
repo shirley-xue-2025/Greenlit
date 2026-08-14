@@ -6,30 +6,104 @@
   "decision": "signed",
   "signed_at": "2026-05-12T16:40:00Z",
   "signers": ["Priya Chen, Legal", "Jonas Weber, Security"],
+  "requester": "Lena Hofmann",
+  "requester_role": "Engineering",
   "messages": [
     {
-      "user": "Shirley Xue",
-      "role": "Product",
-      "ts": "2026-05-08T09:12:00Z",
-      "text": "Can Engineering use Cursor for internal IDE work? Same problem as the last coding-assistant request: we need something in the editor, not a chat tab."
+      "user": "Lena Hofmann",
+      "role": "Engineering",
+      "ts": "2026-04-08T09:07:00Z",
+      "text": "Can we just use Cursor. ChatGPT in the browser is killing me. I need it in the editor. I'll pay on my card if Legal is going to sit on this."
+    },
+    {
+      "user": "Ravi Kapoor",
+      "role": "Engineering",
+      "ts": "2026-04-08T09:19:00Z",
+      "text": "+1 we already let people use Copilot on personal github. this is the same thing right"
     },
     {
       "user": "Jonas Weber",
       "role": "Security",
-      "ts": "2026-05-08T11:04:00Z",
-      "text": "Org bar is unchanged: no customer PII in prompts, company SSO only, prompt logs kept 6 months for Legal, internal employees only, named owner. Cursor is a code tool so we also need a signed DPA and written proof they do not train on or keep our code."
+      "ts": "2026-04-08T11:41:00Z",
+      "text": "It is not the same thing. Stop. No personal cards, no personal github. I need to see their terms before anyone pastes customer data into a prompt."
+    },
+    {
+      "user": "Lena Hofmann",
+      "role": "Engineering",
+      "ts": "2026-04-09T10:02:00Z",
+      "text": "Fine. Company login. Can I at least start with my Gmail so I can try it this week."
+    },
+    {
+      "user": "Jonas Weber",
+      "role": "Security",
+      "ts": "2026-04-09T10:14:00Z",
+      "text": "No. Company SSO only. Named owner. Internal employees. Prompt logs Legal can actually read. That bar does not move because you are blocked this sprint."
+    },
+    {
+      "user": "Lena Hofmann",
+      "role": "Engineering",
+      "ts": "2026-04-13T16:44:00Z",
+      "text": "From their terms (Anysphere ToS excerpt): We may use Customer Content to operate, maintain, and improve the Services, including to train and improve our models, unless you have an executed opt-out addendum. File: cursor-tos-excerpt.pdf"
+    },
+    {
+      "user": "Jonas Weber",
+      "role": "Security",
+      "ts": "2026-04-13T17:03:00Z",
+      "text": "That is exactly why. They train unless we have paper. I also want written proof they do not keep our code after the session. Do not paste customer PII into prompts in the meantime."
+    },
+    {
+      "user": "Priya Chen",
+      "role": "Legal",
+      "ts": "2026-04-15T09:28:00Z",
+      "text": "GDPR Art. 28 — if they process personal data for us they are a processor. We need a signed DPA with this vendor, not a screenshot of a marketing page. I am not signing on a terms paste."
+    },
+    {
+      "user": "Tomas Novak",
+      "role": "Procurement",
+      "ts": "2026-04-15T11:55:00Z",
+      "text": "Emailed their sales. They said the DPA is on the trust site, click accept. That is not how we do this. Chasing a countersigned copy."
+    },
+    {
+      "user": "Lena Hofmann",
+      "role": "Engineering",
+      "ts": "2026-04-23T08:51:00Z",
+      "text": "Any news. It has been two weeks. People are using it anyway on personal laptops which is worse."
+    },
+    {
+      "user": "Tomas Novak",
+      "role": "Procurement",
+      "ts": "2026-04-23T13:10:00Z",
+      "text": "Vendor legal still reviewing our annex. I sent the no-training-on-code language again. I do not have a file number yet."
+    },
+    {
+      "user": "Jonas Weber",
+      "role": "Security",
+      "ts": "2026-04-23T13:22:00Z",
+      "text": "Logs: they offered 30 days. We need 6 months and Legal must be able to read them. Do not accept 30 days to close this faster."
+    },
+    {
+      "user": "Lena Hofmann",
+      "role": "Engineering",
+      "ts": "2026-05-04T09:00:00Z",
+      "text": "This is a month. Can someone just tell me if this is dead."
+    },
+    {
+      "user": "Priya Chen",
+      "role": "Legal",
+      "ts": "2026-05-04T15:17:00Z",
+      "text": "Not dead. Still not signing until Tomas has a countersigned DPA and the training opt-out is in the annex, not in a Slack screenshot."
     },
     {
       "user": "Tomas Novak",
       "role": "Procurement",
       "ts": "2026-05-09T14:22:00Z",
-      "text": "Anysphere DPA is signed (file PROC-DPA-CURSOR-2026-05). Training opt-out is in the DPA annex: they do not train on customer code and do not retain prompts after the session. SSO via our IdP is on."
+      "text": "Anysphere DPA countersigned (file PROC-DPA-CURSOR-2026-05). Training opt-out is in the DPA annex: they do not train on customer code and do not retain prompts after the session. SSO via our IdP is on."
     },
     {
       "user": "Priya Chen",
       "role": "Legal",
       "ts": "2026-05-12T16:40:00Z",
-      "text": "Legal signs Cursor for Engineering, owner Shirley Xue, internal IDE use only. Conditions: no customer PII in prompts; company SSO; 6-month prompt audit; Anysphere DPA on file; no-training-on-code annex. This DPA does not cover any other vendor."
+      "text": "Legal signs Cursor for Engineering, owner Lena Hofmann, internal IDE use only. Conditions: no customer PII in prompts; company SSO; 6-month prompt audit; Anysphere DPA on file; no-training-on-code annex. This DPA does not cover any other vendor. Recording the signed record in Greenlit so we do not redo this month in the next thread."
     }
   ]
 }

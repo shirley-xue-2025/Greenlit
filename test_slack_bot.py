@@ -31,6 +31,8 @@ def test_copy_rules() -> None:
     assert "company rules" not in text
     assert "company login" in text
     assert "privacy contract" in text
+    assert "Cursor" not in text
+    assert "Notion" not in text
     actions = [b for b in blocks if b["type"] == "actions"]
     assert len(actions) == 1
     buttons = actions[0]["elements"]
@@ -60,7 +62,8 @@ def test_live_copy_has_no_hash() -> None:
 
 def test_sign_followup() -> None:
     assert "#" not in SIGN_FOLLOWUP
-    assert "DPA" in SIGN_FOLLOWUP
+    assert "privacy contract" in SIGN_FOLLOWUP
+    assert "DPA" not in SIGN_FOLLOWUP
     assert "keep our code" in SIGN_FOLLOWUP
     assert "Jonas Weber" in SIGN_FOLLOWUP
     print("4. sign follow-up: PASS")
@@ -95,6 +98,15 @@ def test_security_route() -> None:
     print("6. security route: PASS")
 
 
+def test_replies_stay_in_thread() -> None:
+    import inspect
+    import slack_bot as bot
+
+    src = inspect.getsource(bot)
+    assert "reply_broadcast=True" not in src
+    print("7. no channel broadcast: PASS")
+
+
 if __name__ == "__main__":
     test_golden_trigger()
     test_copy_rules()
@@ -103,4 +115,5 @@ if __name__ == "__main__":
     test_sign_followup()
     test_legal_route()
     test_security_route()
+    test_replies_stay_in_thread()
     print("slack_bot copy checks: ALL PASS")

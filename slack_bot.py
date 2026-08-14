@@ -24,14 +24,13 @@ DASHBOARD_URL = os.environ.get("GREENLIT_DASHBOARD_URL", "http://127.0.0.1:8765/
 GOLDEN_TEXT = (
     "I've opened the Replit approval. You cannot start using it yet.\n\n"
     "The usual checks are already covered — company login, internal use only, "
-    "no customer data in prompts. Same as Cursor and Notion. You don't need "
-    "to re-explain those.\n\n"
+    "no customer data in prompts. You don't need to re-explain those.\n\n"
     "Still missing, and not yours: Legal needs a signed privacy contract with "
     "Replit, and Security needs proof they do not keep our code.\n\n"
     "You don't need to upload or sign anything."
 )
 SIGN_FOLLOWUP = (
-    "Legal (Priya Chen) signed the Replit DPA. You still cannot use Replit — "
+    "Legal (Priya Chen) signed Replit's privacy contract. You still cannot use Replit — "
     "Security (Jonas Weber) still needs proof they do not keep our code."
 )
 BUTTON_TEXT = "See my request"
@@ -40,21 +39,21 @@ LEGAL_BUTTON = "Open as Legal"
 LEGAL_ACTION_ID = "open_as_legal"
 LEGAL_ROUTE_TEXT = (
     "Legal · @Priya Chen — Shirley Xue (Product) asked to start a Replit approval. "
-    "Your piece is the Replit DPA.\n\n"
-    "Similar threads: Cursor (code tool, you signed in May) and Notion AI "
-    "(not a code tool, you signed in June). Those DPAs are not interchangeable.\n\n"
-    "Legal agent: you can sign this DPA. Do not copy Notion. "
-    "Code-retention stays with Security (Jonas Weber)."
+    "Your piece is Replit's privacy contract.\n\n"
+    "Similar threads: Cursor (coding tool, you signed in May) and Notion AI "
+    "(not a coding tool, you signed in June). Those contracts are not interchangeable.\n\n"
+    "Legal recommendation: you can sign this privacy contract. Do not copy Notion. "
+    "Proof they do not keep our code stays with Security (Jonas Weber)."
 )
 SECURITY_BUTTON = "Open as Security"
 SECURITY_ACTION_ID = "open_as_security"
 SECURITY_ROUTE_TEXT = (
     "Security · @Jonas Weber — Shirley Xue (Product) asked to start a Replit approval. "
     "Your piece is proof they do not keep our code.\n\n"
-    "From earlier threads: you required that clause on Cursor. Notion is not "
-    "a code tool — its DPA cannot prove this. Those facts are not interchangeable.\n\n"
-    "Security agent: a signature will not close this gap. Evidence is still "
-    "missing. The DPA stays with Legal (Priya Chen)."
+    "From earlier threads: you required that on Cursor. Notion is not "
+    "a coding tool — its privacy contract cannot prove this. Those facts are not interchangeable.\n\n"
+    "Security recommendation: a signature will not close this. Evidence is still "
+    "missing. The privacy contract stays with Legal (Priya Chen)."
 )
 
 
@@ -226,12 +225,7 @@ def post_legal_signed() -> bool:
 
     client = WebClient(token=token)
     try:
-        client.chat_postMessage(
-            channel=data["channel"],
-            thread_ts=data["thread_ts"],
-            text=follow,
-            reply_broadcast=True,
-        )
+        _post_in_thread(client, data["channel"], data["thread_ts"], text=follow)
     except SlackApiError as exc:
         print(f"slack write-back failed: {exc.response.get('error')}", file=sys.stderr)
         return False
@@ -255,6 +249,19 @@ def _web() -> "object":
 
     token = (os.environ.get("SLACK_BOT_TOKEN") or "").strip()
     return WebClient(token=token)
+
+
+def _post_in_thread(client, channel: str, thread_ts: str, *, text: str, blocks=None) -> None:
+    """Reply in the request thread only. Never also-send to the channel."""
+    kwargs = {
+        "channel": channel,
+        "thread_ts": thread_ts,
+        "text": text,
+        "reply_broadcast": False,
+    }
+    if blocks is not None:
+        kwargs["blocks"] = blocks
+    client.chat_postMessage(**kwargs)
 
 
 def _thread_action_ids(client, channel: str, thread_ts: str) -> set[str]:
@@ -302,12 +309,8 @@ def respond_to_mention(
             requester_id=requester_id,
         )
         try:
-            client.chat_postMessage(
-                channel=channel,
-                thread_ts=thread_ts,
-                text=fallback,
-                blocks=blocks,
-                reply_broadcast=True,
+            _post_in_thread(
+                client, channel, thread_ts, text=fallback, blocks=blocks
             )
         except SlackApiError as exc:
             print(f"mention reply failed: {exc.response.get('error')}", file=sys.stderr)
@@ -320,12 +323,8 @@ def respond_to_mention(
             remember_thread(channel, thread_ts)
         route_text, route_blocks = build_legal_route()
         try:
-            client.chat_postMessage(
-                channel=channel,
-                thread_ts=thread_ts,
-                text=route_text,
-                blocks=route_blocks,
-                reply_broadcast=True,
+            _post_in_thread(
+                client, channel, thread_ts, text=route_text, blocks=route_blocks
             )
         except SlackApiError as exc:
             print(f"legal route failed: {exc.response.get('error')}", file=sys.stderr)
@@ -338,12 +337,8 @@ def respond_to_mention(
             remember_thread(channel, thread_ts)
         route_text, route_blocks = build_security_route()
         try:
-            client.chat_postMessage(
-                channel=channel,
-                thread_ts=thread_ts,
-                text=route_text,
-                blocks=route_blocks,
-                reply_broadcast=True,
+            _post_in_thread(
+                client, channel, thread_ts, text=route_text, blocks=route_blocks
             )
         except SlackApiError as exc:
             print(f"security route failed: {exc.response.get('error')}", file=sys.stderr)

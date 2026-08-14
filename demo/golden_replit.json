@@ -19,7 +19,7 @@
         "vendor_dpa_signed",
         "no_training_on_code"
       ],
-      "natural_language": "You can sign a Replit DPA tonight. Five company rules already apply from Shirley's Cursor and Notion threads. Cursor's Anysphere DPA does not transfer. Notion's DPA is not evidence for a code tool. Signing does not approve Replit for use — code-retention stays with Security."
+      "natural_language": "You can sign Replit's privacy contract tonight. Five company checks already apply from Cursor and Notion. Cursor's contract is with Anysphere, not Replit. Notion's contract is not evidence for a coding tool. Signing does not mean Replit is approved — proof they do not keep our code stays with Security."
     },
     {
       "agent": "security",
@@ -35,7 +35,7 @@
         "vendor_dpa_signed",
         "no_training_on_code"
       ],
-      "natural_language": "You can require proof that Replit does not keep Product's code. You required that clause on Cursor. Notion is not a code tool — its DPA cannot prove this. A signature will not close the gap. The DPA is Legal's."
+      "natural_language": "You can require proof that Replit does not keep our code. You required that on Cursor. Notion is not a coding tool — its privacy contract cannot prove this. A signature will not close the gap. The privacy contract is Legal's."
     },
     {
       "agent": "procurement",
@@ -51,7 +51,7 @@
         "vendor_dpa_signed",
         "no_training_on_code"
       ],
-      "natural_language": "No signed DPA exists for Replit, and we have no contractually binding assurance that their platform will not train on our internal code. Without these procurement artifacts, we cannot approve this tool."
+      "natural_language": "There is no signed privacy contract with Replit, and no written promise they will not train on our code. Without those, we cannot approve this tool."
     },
     {
       "agent": "challenger",
@@ -67,7 +67,7 @@
         "vendor_dpa_signed",
         "no_training_on_code"
       ],
-      "natural_language": "Notion had a signed DPA but is not a code tool, so it cannot prove Replit code retention. Cursor's Anysphere DPA does not transfer to Replit."
+      "natural_language": "Notion had a signed privacy contract but is not a coding tool, so it cannot prove Replit does not keep our code. Cursor's contract is with Anysphere — it does not transfer to Replit."
     }
   ]
 }

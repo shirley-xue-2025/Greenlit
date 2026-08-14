@@ -47,7 +47,8 @@ REPLIT_THREAD_PATH = GATE / "corpus" / "replit-request.json"
 GRAPH_PATH = WEB_DIR / "graph.html"
 
 LEGAL_ONLY_DETAIL = (
-    "Only Legal can close the DPA gap tonight. Code-retention still needs evidence."
+    "Only Legal can file Replit's privacy contract tonight. "
+    "Proof they do not keep our code still needs evidence."
 )
 
 app = FastAPI(title="Greenlit")

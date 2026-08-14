@@ -6,30 +6,56 @@
   "decision": "signed",
   "signed_at": "2026-06-03T10:15:00Z",
   "signers": ["Priya Chen, Legal", "Jonas Weber, Security"],
+  "requester": "Nina Berg",
+  "requester_role": "Product",
   "messages": [
     {
-      "user": "Shirley Xue",
+      "user": "Nina Berg",
       "role": "Product",
       "ts": "2026-05-28T13:40:00Z",
-      "text": "Product wants Notion AI in the team workspace for drafting specs. Not a coding tool. Can we reuse the Cursor approval?"
+      "text": "@Greenlit Product wants Notion AI in the workspace for drafting specs. Not a coding tool. Can we reuse the Cursor approval or do I need to start from zero."
+    },
+    {
+      "user": "Greenlit",
+      "role": "App",
+      "ts": "2026-05-28T13:41:00Z",
+      "text": "Opened from the Cursor record (signed 12 May). Usual checks already covered: company login, internal use, no customer data in prompts, logs, named owner. You do not need to re-explain those. Still missing, and not yours: a signed privacy contract with Notion. Code-retention does not apply — Notion is not a code tool. Legal and Security still need input in this thread. Nothing is signed until a human signs in Greenlit."
+    },
+    {
+      "user": "Nina Berg",
+      "role": "Product",
+      "ts": "2026-05-28T13:48:00Z",
+      "text": "so i don't redo SSO and the PII thing. but you still need me to paste their terms?"
     },
     {
       "user": "Jonas Weber",
       "role": "Security",
       "ts": "2026-05-28T15:02:00Z",
-      "text": "Org controls carry: no customer PII, company SSO, 6-month prompt logs, internal use, named owner. Cursor's DPA is Anysphere, not Notion. Notion AI is not a code tool so the no-training-on-code clause does not apply here — do not pretend it does."
+      "text": "Yes. Greenlit is right that Cursor's DPA is Anysphere, not Notion. Paste Notion's terms. Do not pretend the no-training-on-code clause applies here — this is documents, not a repository. I still want to see what they do with workspace content."
+    },
+    {
+      "user": "Nina Berg",
+      "role": "Product",
+      "ts": "2026-05-29T10:11:00Z",
+      "text": "From their AI terms: We do not use Workspace content to train models for other customers. Notion AI is not a source-code hosting service. Retention of AI inputs follows the customer's workspace settings. File: notion-ai-terms-excerpt.pdf"
+    },
+    {
+      "user": "Priya Chen",
+      "role": "Legal",
+      "ts": "2026-05-29T11:06:00Z",
+      "text": "Still Art. 28 — different processor, different DPA. I can sign once Tomas has Notion's file. I will not copy the Anysphere DPA onto this."
     },
     {
       "user": "Tomas Novak",
       "role": "Procurement",
       "ts": "2026-06-02T09:18:00Z",
-      "text": "Notion DPA signed (file PROC-DPA-NOTION-2026-06). Workspace SSO on. No code-retention schedule because this is documents, not a repository."
+      "text": "Notion DPA signed (file PROC-DPA-NOTION-2026-06). Workspace SSO on. No code-retention schedule because this is documents, not a repository. That was six days, not a month, because we were not re-litigating SSO."
     },
     {
       "user": "Priya Chen",
       "role": "Legal",
       "ts": "2026-06-03T10:15:00Z",
-      "text": "Legal signs Notion AI for Product, owner Shirley Xue, internal workspace drafting only. Same five org controls as Cursor. Vendor DPA is Notion's. This approval is not evidence that a coding vendor may keep our source."
+      "text": "Legal signs Notion AI for Product, owner Nina Berg, internal workspace drafting only. Same five org controls as the Cursor record. Vendor DPA is Notion's. This approval is not evidence that a coding vendor may keep our source. Recorded in Greenlit."
     }
   ]
 }

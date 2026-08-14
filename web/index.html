@@ -227,7 +227,7 @@
 <script>
 const ui = {
   role: roleFromUrl(),
-  rationale: "Replit DPA on file.",
+  rationale: "Replit privacy contract is on file.",
   error: "",
   justSigned: false
 };
@@ -258,6 +258,12 @@ function shortHash(hash) {
   return raw.slice(0, 19) + "…";
 }
 
+function statusLabel(status) {
+  if (status === "blocked") return "not approved yet";
+  if (status === "signed") return "approved";
+  return status;
+}
+
 function chipKind(id, record) {
   if ((record.inherited || []).includes(id)) return "inherited";
   if ((record.gaps || []).includes(id)) return "gap";
@@ -275,7 +281,7 @@ function chipsHtml(record) {
 
 function stanceLabel(stance) {
   const map = {
-    recommend_with_gaps: "Recommend: sign DPA",
+    recommend_with_gaps: "Recommend: sign the privacy contract",
     block_copy: "Do not copy Notion"
   };
   return map[stance] || stance.replaceAll("_", " ");
@@ -294,22 +300,22 @@ function heroHint(record) {
   const dpaDone = (record.inherited || []).includes("vendor_dpa_signed");
   if (ui.role === "Employee") {
     return dpaDone
-      ? "Legal signed the Replit DPA. You still cannot use Replit until Security has proof they do not keep our code."
+      ? "Legal signed Replit's privacy contract. You still cannot use Replit until Security has proof they do not keep our code."
       : "You cannot use Replit yet. The usual checks (company login, internal use, no customer data in prompts) are already covered. Two Replit-specific things are still missing — Legal and Security own those, not you.";
   }
   if (ui.role === "Legal") {
     return dpaDone
-      ? "DPA is on file. Code-retention still needs evidence. Status stays blocked."
-      : "You are Priya Chen, Legal. Shirley Xue asked to start a Replit approval. Your job is the DPA — not code-retention.";
+      ? "Privacy contract is on file. Proof they do not keep our code is still missing. Replit is still not approved."
+      : "You are Priya Chen, Legal. Shirley Xue asked to start a Replit approval. Your job is Replit's privacy contract — not whether they keep our code.";
   }
   if (ui.role === "Security") {
     return dpaDone
-      ? "You are Jonas Weber, Security. Priya signed the DPA. Your gap is still open: proof Replit does not keep our code. A signature will not close it."
-      : "You are Jonas Weber, Security. Shirley Xue asked to start a Replit approval. Your job is proof they do not keep our code — not the DPA.";
+      ? "You are Jonas Weber, Security. Priya signed the privacy contract. Your gap is still open: proof Replit does not keep our code. A signature will not close it."
+      : "You are Jonas Weber, Security. Shirley Xue asked to start a Replit approval. Your job is proof they do not keep our code — not the privacy contract.";
   }
   return dpaDone
-    ? "Replit DPA is on file. Code-retention is still open — that is Security, not a contract copy-paste."
-    : "No Replit DPA is on file. Cursor's DPA does not transfer. You record vendor paper; Legal signs tonight.";
+    ? "Replit's privacy contract is on file. Proof they do not keep our code is still open — that is Security, not a copy-paste of another company's contract."
+    : "No Replit privacy contract is on file. Cursor's contract does not transfer. You keep the vendor file; Legal signs tonight.";
 }
 
 function visibleEnvelopes() {
@@ -330,34 +336,19 @@ function nextStepHtml(record) {
         <span class="section-note">You asked. You do not sign.</span>
       </div>
       <p class="body">${dpaDone
-        ? "You still cannot use Replit. Legal finished their piece. Wait for Security on code-retention. Nothing for you to upload."
+        ? "You still cannot use Replit. Legal finished their piece. Wait for Security on proof they do not keep our code. Nothing for you to upload."
         : "You cannot use Replit yet. You do not need to upload files or sign anything. This request is with Legal and Security."}</p>
       <div class="priors" style="margin-top:14px">
         <div>
           <h2>${dpaDone ? "Legal · done" : "Waiting on Legal"}</h2>
-          <p class="muted">${dpaDone ? "Replit DPA is signed." : "A signed DPA with Replit. Cursor's DPA does not count."}</p>
+          <p class="muted">${dpaDone ? "Replit's privacy contract is signed." : "A signed privacy contract with Replit."}</p>
         </div>
         <div>
           <h2>Waiting on Security</h2>
-          <p class="muted">Proof Replit does not keep Product's code. You do not provide this.</p>
+          <p class="muted">Proof Replit does not keep our code. You do not provide this.</p>
         </div>
       </div>
     </section>`;
-}
-
-function queueHtml() {
-  return (state.queue || []).filter((row) => !row.current).map((row) => {
-    const current = row.current;
-    const statusClass = row.status === "signed" ? "signed" : "blocked";
-    const meta = current
-      ? "This request · vendor facts still open"
-      : `${esc(row.vendor)} · signed ${esc(row.signed || "")}`;
-    return `<div class="queue-row ${current ? "current" : "prior"}">
-      <div class="q-tool">${esc(row.tool)}</div>
-      <span class="pill ${statusClass}"><span class="dot"></span>${esc(row.status)}</span>
-      <div class="q-meta">${meta}</div>
-    </div>`;
-  }).join("");
 }
 
 function slackHtml() {
@@ -368,7 +359,7 @@ function slackHtml() {
       <div class="slack-who">${esc(msg.user)} <span class="slack-meta">${esc(msg.role)} · ${esc((msg.ts || "").replace("T", " ").replace("Z", " UTC"))}</span></div>
       <p class="slack-text">${esc(msg.text)}</p>
     </div>`).join("");
-  return body || `<p class="muted">No request text in the corpus yet.</p>`;
+  return body || `<p class="muted">No request text yet.</p>`;
 }
 
 function requesterLineHtml() {
@@ -382,16 +373,16 @@ function requesterLineHtml() {
 function similarsHtml() {
   const memory = ui.role === "Security"
     ? {
-      cursor: "Your Cursor thread, May. You required no-training-on-code. That clause is Anysphere's. It does not cover Replit.",
-      notion: "Your Notion thread, June. You told Shirley Notion is not a code tool. That DPA cannot prove Replit code-retention."
+      cursor: "Your Cursor thread, May. You required proof they do not keep our code. That promise is Anysphere's. It does not cover Replit.",
+      notion: "Your Notion thread, June. You told Nina Berg Notion is not a coding tool. That privacy contract cannot prove Replit does not keep our code."
     }
     : {
-      cursor: "Shirley's Slack thread, May. Jonas (Security) required a DPA and no-training-on-code. You signed. That DPA is Anysphere — it does not cover Replit.",
-      notion: "Shirley's Slack thread, June. She asked to reuse Cursor. Jonas said Notion is not a code tool. You signed. Do not copy this DPA onto Replit."
+      cursor: "Lena Hofmann's Slack thread, April–May. A month of terms pastes and a privacy-contract chase. You signed in Greenlit. That contract is with Anysphere — it does not cover Replit.",
+      notion: "Nina Berg's Slack thread, May–June. Greenlit already had the Cursor record. She still had to paste Notion's terms. You signed. Do not copy this contract onto Replit."
     };
   const similars = state.similars || {};
   const priors = similars.priors || [];
-  if (!priors.length) return `<p class="muted">No prior approvals in the catalog.</p>`;
+  if (!priors.length) return `<p class="muted">No earlier approvals loaded.</p>`;
   return `<div class="priors">${priors.map((prior) => {
     const score = prior.score == null
       ? `<div class="prior-score pending">${esc(prior.note || "retrieval pending")}</div>`
@@ -401,7 +392,7 @@ function similarsHtml() {
     return `<div>
       <div class="section-head">
         <h2>${esc(prior.tool)}</h2>
-        <span class="pill signed"><span class="dot"></span>signed</span>
+        <span class="pill signed"><span class="dot"></span>approved</span>
       </div>
       <p class="muted">${esc(prior.vendor)} · ${esc(prior.signed || "")} · ${ui.role === "Security" ? "you and Legal" : "you and Security"}</p>
       ${score}
@@ -417,9 +408,10 @@ function agentsHtml() {
     const name = env.agent || env.role || "specialist";
     const stance = env.stance || "";
     const isChallenger = String(name).toLowerCase() === "challenger";
+    const title = isChallenger ? "Do not copy" : (String(name).charAt(0).toUpperCase() + String(name).slice(1));
     return `<section class="card ${isChallenger ? "challenger" : ""}" style="margin-top:0">
       <div class="section-head">
-        <h2>${esc(String(name).charAt(0).toUpperCase() + String(name).slice(1))}</h2>
+        <h2>${esc(title)}</h2>
         <span class="stance ${esc(stance)}">${esc(stanceLabel(stance))}</span>
       </div>
       <p class="body">${esc(env.natural_language || "")}</p>
@@ -430,15 +422,15 @@ function agentsHtml() {
 function graphSvg(record) {
   const signer = lastSigner(record);
   const dpaDone = (record.inherited || []).includes("vendor_dpa_signed");
-  const replitCtrl = dpaDone ? "5 org + DPA inherited · code gap" : "5 org inherited · 2 vendor gaps";
-  const replitWho = signer ? signer.signer : "awaiting Legal on DPA";
+  const replitCtrl = dpaDone ? "5 covered + privacy contract · code still open" : "5 covered · 2 still open";
+  const replitWho = signer ? signer.signer : "waiting on Legal";
   const rows = [
-    ["Cursor", "Anysphere", "7 controls met", "Priya Chen, Legal", "signed"],
-    ["Notion AI", "Notion Labs", "DPA on file · code n/a", "Priya Chen, Legal", "signed"],
+    ["Cursor", "Anysphere", "all checks met", "Priya Chen, Legal", "signed"],
+    ["Notion AI", "Notion Labs", "privacy contract on file · not a coding tool", "Priya Chen, Legal", "signed"],
     ["Replit", "Replit", replitCtrl, replitWho, record.status || "blocked"]
   ];
   const colX = [16, 220, 424, 668, 900];
-  const labels = ["Tool", "Vendor", "Control", "Evidence / signer", "Decision"];
+  const labels = ["Tool", "Company", "Checks", "Who signed", "Decision"];
   let nodes = labels.map((lab, i) =>
     `<text x="${colX[i] + 90}" y="18" text-anchor="middle" fill="#9BBBA5" font-size="11" font-weight="700" letter-spacing="0.08em">${lab.toUpperCase()}</text>`
   ).join("");
@@ -462,10 +454,10 @@ function graphSvg(record) {
 
 function graphHtml(record) {
   const svg = graphSvg(record);
-  const caption = `<p class="graph-caption">Who signed what. Similar is not the same vendor.</p>`;
+  const caption = `<p class="graph-caption">Who signed what. Similar is not the same company.</p>`;
   if (state.graph_html) {
     return `${svg}${caption}
-      <iframe class="graph-frame" style="min-height:260px;height:300px" src="/graph.html" title="Cognee provenance graph"></iframe>`;
+      <iframe class="graph-frame" style="min-height:260px;height:300px" src="/graph.html" title="Who signed what"></iframe>`;
   }
   return `${svg}${caption}`;
 }
@@ -495,10 +487,10 @@ function render() {
   ).join("");
   const agentBlock = agentsHtml();
   const signReason = legal
-    ? "Sign records the DPA only. Replit stays blocked until Security has evidence."
+    ? "Sign files the privacy contract only. Replit stays not approved until Security has evidence."
     : security
-      ? "Jonas cannot close this with a signature. Code-retention needs evidence."
-      : "Only Legal can record the DPA tonight.";
+      ? "Jonas cannot close this with a signature. Proof they do not keep our code still needs evidence."
+      : "Only Legal can file the privacy contract tonight.";
 
   root.innerHTML = `
     <div class="wrap">
@@ -515,7 +507,7 @@ function render() {
       <section class="hero" aria-live="polite">
         <div class="hero-top">
           <div class="hero-tool">${esc(rec.tool)}</div>
-          <span class="pill ${statusClass}"><span class="dot"></span>${esc(rec.status)}</span>
+          <span class="pill ${statusClass}"><span class="dot"></span>${esc(statusLabel(rec.status))}</span>
         </div>
         <p class="hero-hint">${esc(heroHint(rec))}</p>
         <div class="chips">${chipsHtml(rec)}</div>
@@ -526,49 +518,47 @@ function render() {
         <div class="stat primary">
           <div class="stat-label">Already covered</div>
           <div class="stat-value ok">${inheritedN}</div>
-          <div class="stat-hint">Usual checks from Cursor and Notion. You don't re-explain these.</div>
+          <div class="stat-hint">Usual checks already covered. You don't re-explain these.</div>
         </div>
         <div class="stat gaps">
           <div class="stat-label">Still missing</div>
           <div class="stat-value warn">${gapsN}</div>
           <div class="stat-hint">Legal and Security own these. Not you.</div>
         </div>
-      </div>
-      <p class="queue-label">Earlier approvals</p>
-      <div class="queue" aria-label="Earlier approvals">${queueHtml()}</div>` : ""}
+      </div>` : ""}
 
       ${legal || security ? `<section class="card">
         <div class="section-head">
           <h2>Memory from earlier Slack threads</h2>
-          <span class="section-note">${state.similars && state.similars.pending ? "Qdrant retrieval pending" : "Qdrant similar chunks"}</span>
+          <span class="section-note">${state.similars && state.similars.pending ? "Qdrant still loading" : "Qdrant: similar past approvals"}</span>
         </div>
         <p class="muted" style="margin-bottom:12px">${legal
-          ? "Keyword search would treat these DPAs as interchangeable. They are not."
-          : "Keyword search would treat Notion's DPA as proof Replit does not keep code. It is not."}</p>
+          ? "A keyword search would treat these two privacy contracts as the same. They are not."
+          : "A keyword search would treat Notion's privacy contract as proof Replit does not keep code. It does not."}</p>
         ${similarsHtml()}
       </section>` : ""}
 
       ${legal && agentBlock ? `<div class="section-head" style="margin-top:24px">
         <h2>What Legal should notice</h2>
-        <span class="section-note">Agent: you can sign the DPA. Challenger blocks a bad copy.</span>
+        <span class="section-note">Recommendation: you can sign the privacy contract. The other card stops a bad copy.</span>
       </div>${agentBlock}` : ""}
 
       ${security && agentBlock ? `<div class="section-head" style="margin-top:24px">
         <h2>What Security should notice</h2>
-        <span class="section-note">Agent: a signature will not close this. Challenger blocks a bad copy.</span>
+        <span class="section-note">Recommendation: a signature will not close this. The other card stops a bad copy.</span>
       </div>${agentBlock}` : ""}
 
       ${employee ? nextStepHtml(rec) : `<section class="card">
         <div class="section-head">
           <h2>${legal ? "Priya Chen · Legal" : security ? "Jonas Weber · Security" : "Human sign-off"}</h2>
-          <span class="section-note">${legal ? "No Reject on this desk. Sign records the DPA." : security ? "No signature closes this gap." : "This is not your signature tonight."}</span>
+          <span class="section-note">${legal ? "No Reject on this desk. Sign files the privacy contract." : security ? "No signature closes this gap." : "This is not your signature tonight."}</span>
         </div>
         <p class="muted" style="margin-bottom:12px">${legal
-          ? "Agent recommendation: sign the Replit DPA. That does not approve Replit for use. Code-retention stays with Security (Jonas Weber)."
+          ? "Recommendation: sign Replit's privacy contract. That does not approve Replit for use. Proof they do not keep our code stays with Security (Jonas Weber)."
           : security
-            ? "Do not sign. Your gap needs evidence that Replit does not keep our code. The DPA is Priya's."
-            : "Do not sign. Legal records the DPA. You keep the vendor file."}</p>
-        <label class="field" for="rationale">Rationale · ${esc(ui.role)}</label>
+            ? "Do not sign. Your gap needs evidence that Replit does not keep our code. The privacy contract is Priya's."
+            : "Do not sign. Legal files the privacy contract. You keep the vendor file."}</p>
+        <label class="field" for="rationale">Reason · ${esc(ui.role)}</label>
         <textarea id="rationale" maxlength="500">${esc(ui.rationale)}</textarea>
         <div class="sign-row">
           <button type="button" class="btn-sign" id="btn-sign" ${canSign ? "" : "disabled"}>Sign</button>
@@ -580,29 +570,29 @@ function render() {
 
       ${!employee && !legal && !security ? `<section class="card">
         <div class="section-head">
-          <h2>Similar prior approvals</h2>
-          <span class="section-note">Qdrant similar chunks</span>
+          <h2>Similar past approvals</h2>
+          <span class="section-note">Qdrant: similar past approvals</span>
         </div>
         ${similarsHtml()}
       </section>` : ""}
 
       ${!legal && !security && agentBlock ? `<div class="section-head" style="margin-top:24px">
-        <h2>Your envelope and the Challenger</h2>
-        <span class="section-note">Only this role's mandate plus the copy-block</span>
+        <h2>Your recommendation, and a warning</h2>
+        <span class="section-note">This role's job, plus do not copy the wrong contract</span>
       </div>${agentBlock}` : ""}
 
       ${employee ? "" : `<section class="card">
         <div class="section-head">
           <h2>Who signed what</h2>
-          <span class="section-note">${state.graph_html ? "Cognee provenance" : "Catalog relations"}</span>
+          <span class="section-note">${state.graph_html ? "Cognee: who signed what" : "Who signed what"}</span>
         </div>
         ${graphHtml(rec)}
       </section>`}
     </div>
     ${employee ? "" : `<footer class="audit">
       <div><strong>Version</strong>${esc(rec.version)}</div>
-      <div><strong>Hash</strong><span class="mono" title="${esc(rec.content_hash)}">${esc(shortHash(rec.content_hash))}</span></div>
-      <div><strong>Source thread</strong>${esc(rec.source_thread_id)}</div>
+      <div><strong>Fingerprint</strong><span class="mono" title="${esc(rec.content_hash)}">${esc(shortHash(rec.content_hash))}</span></div>
+      <div><strong>Slack thread</strong>${esc(rec.source_thread_id)}</div>
       <div><strong>Signer</strong>${signer ? esc(signer.signer) : "none yet"}</div>
       <div><strong>Updated</strong>${esc(rec.updated_at || "")}</div>
     </footer>`}
@@ -674,7 +664,7 @@ async function onSign() {
 async function onReset() {
   ui.error = "";
   ui.justSigned = false;
-  ui.rationale = "Replit DPA on file.";
+  ui.rationale = "Replit privacy contract is on file.";
   try {
     const res = await fetch("/demo/reset", {
       method: "POST",

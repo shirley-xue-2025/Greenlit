@@ -21,8 +21,9 @@ CONTROLS_PATH = GATE / "corpus" / "controls.json"
 REPLIT_REQUEST = "@Greenlit I want to use Replit for internal prototypes. Can you help with the approval?"
 
 CHALLENGER_REQUIRED_NL = (
-    "Notion had a signed DPA but is not a code tool, so it cannot prove "
-    "Replit code retention. Cursor's Anysphere DPA does not transfer to Replit."
+    "Notion had a signed privacy contract but is not a coding tool, so it cannot "
+    "prove Replit does not keep our code. Cursor's contract is with Anysphere — "
+    "it does not transfer to Replit."
 )
 
 STANCE_BY_AGENT = {

@@ -2,11 +2,11 @@
   "org_controls": [
     {
       "id": "no_customer_pii",
-      "label": "No customer PII in prompts"
+      "label": "No customer data in prompts"
     },
     {
       "id": "company_sso",
-      "label": "Company SSO only"
+      "label": "Company login only"
     },
     {
       "id": "prompt_audit_6mo",
@@ -24,11 +24,11 @@
   "vendor_controls": [
     {
       "id": "vendor_dpa_signed",
-      "label": "Signed DPA with this vendor"
+      "label": "Signed privacy contract with this company"
     },
     {
       "id": "no_training_on_code",
-      "label": "Vendor does not train on or keep our code"
+      "label": "Does not train on or keep our code"
     }
   ],
   "cases": {
